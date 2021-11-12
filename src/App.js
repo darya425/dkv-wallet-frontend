@@ -1,10 +1,14 @@
 import { lazy, Suspense } from 'react';
 import { Routes } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
 
 import PrivateRoute from './Components/Navigation/PrivateRoute';
 import PublicRoute from './Components/Navigation/PublicRoute';
 
 import Navigation from './Components/Navigation';
+import Container from './Components/UI/Container';
+import muiTheme from './Components/UI/muiTheme';
+
 
 const LoginView = lazy(() =>
   import('./Pages/LoginView' /* webpackChunkName: "LoginView"*/),
@@ -21,10 +25,11 @@ const DiagramView = lazy(() =>
 
 const App = () => {
   return (
-    <>
-      <Navigation />
+    <ThemeProvider theme={muiTheme}>
+      <Container>  
+      {/* <Navigation /> */}
 
-      <Suspense fallback={'Loading...'}>
+      {/* <Suspense fallback={'Loading...'}>
         <Routes>
           <PublicRoute path="/" exact>
             <HomeView />
@@ -46,8 +51,9 @@ const App = () => {
             <RegisterView />
           </PublicRoute>
         </Routes>
-      </Suspense>
-    </>
+      </Suspense> */}
+      </Container>
+    </ThemeProvider>
   );
 };
 
