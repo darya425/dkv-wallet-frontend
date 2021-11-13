@@ -1,4 +1,4 @@
-import styles from './RegisterView.module.css';
+import styles from './RegisterView.module.scss';
 
 function RegisterView() {
   return (
