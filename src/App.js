@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 
 import PrivateRoute from './Components/Navigation/PrivateRoute';
@@ -8,7 +8,6 @@ import PublicRoute from './Components/Navigation/PublicRoute';
 import Navigation from './Components/Navigation';
 import Container from './Components/UI/Container';
 import muiTheme from './Components/UI/muiTheme';
-
 const LoginView = lazy(() =>
   import('./Pages/LoginView' /* webpackChunkName: "LoginView"*/),
 );
@@ -28,29 +27,57 @@ const App = () => {
       <Container>
         {/* <Navigation /> */}
 
-        {/* <Suspense fallback={'Loading...'}>
-        <Routes>
-          <PublicRoute path="/" exact>
-            <HomeView />
-          </PublicRoute>
+        <Suspense fallback={'Loading...'}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PrivateRoute>
+                  <HomeView />
+                </PrivateRoute>
+              }
+            />
 
-          <PrivateRoute path="/user">
-            <p>User</p>
-          </PrivateRoute>
+            <Route
+              path="/user"
+              element={
+                <PrivateRoute>
+                  <p>User</p>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/diagram"
+              element={
+                <PrivateRoute>
+                  <DiagramView />
+                </PrivateRoute>
+              }
+            />
 
-          <PrivateRoute path="/diagram">
-            <DiagramView />
-          </PrivateRoute>
+            <Route
+              path="/login"
+              redirectTo="/user"
+              restricted
+              element={
+                <PublicRoute>
+                  <LoginView />
+                </PublicRoute>
+              }
+            />
 
-          <PublicRoute path="/login" redirectTo="/user" restricted>
-            <LoginView />
-          </PublicRoute>
-
-          <PublicRoute path="/register" redirectTo="/login" restricted>
-            <RegisterView />
-          </PublicRoute>
-        </Routes>
-      </Suspense> */}
+            <Route
+              path="/register"
+              redirectTo="/login"
+              restricted
+              element={
+                <PublicRoute>
+                  <RegisterView />
+                </PublicRoute>
+              }
+            />
+          </Routes>
+        </Suspense>
       </Container>
     </ThemeProvider>
   );
