@@ -9,7 +9,6 @@ import Navigation from './Components/Navigation';
 import Container from './Components/UI/Container';
 import muiTheme from './Components/UI/muiTheme';
 
-
 const LoginView = lazy(() =>
   import('./Pages/LoginView' /* webpackChunkName: "LoginView"*/),
 );
@@ -26,10 +25,10 @@ const DiagramView = lazy(() =>
 const App = () => {
   return (
     <ThemeProvider theme={muiTheme}>
-      <Container>  
-      {/* <Navigation /> */}
+      <Container>
+        {/* <Navigation /> */}
 
-      {/* <Suspense fallback={'Loading...'}>
+        {/* <Suspense fallback={'Loading...'}>
         <Routes>
           <PublicRoute path="/" exact>
             <HomeView />
