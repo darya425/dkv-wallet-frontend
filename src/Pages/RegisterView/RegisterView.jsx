@@ -1,6 +1,6 @@
-import styles from './LoginView.module.css';
+import styles from './RegisterView.module.css';
 
-function LoginView() {
+function RegisterView() {
   return (
     <div className={styles.container}>
       <div className={styles.containerBg}>
@@ -16,4 +16,4 @@ function LoginView() {
   );
 }
 
-export default LoginView;
+export default RegisterView;
