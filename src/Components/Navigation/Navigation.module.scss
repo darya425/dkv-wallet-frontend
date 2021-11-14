@@ -6,6 +6,13 @@
   margin-top: 13px;
   margin-left: auto;
   margin-right: auto;
+
+  @media screen and (min-width: $tablet) {
+    // flex-wrap: wrap;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: left;
+  }
 }
 
 .link {
@@ -19,9 +26,23 @@
   &:not(:first-child) {
     margin-left: 36px;
   }
+
+  @media screen and (min-width: $tablet) {
+    padding: 3px;
+
+    &:not(:first-child) {
+      margin-left: 0px;
+    }
+  }
 }
 
 .activeLink {
   background-color: #4a56e2;
   filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));
+}
+
+.hidden {
+  @media screen and (min-width: $tablet) {
+    @include visually-hidden;
+  }
 }
