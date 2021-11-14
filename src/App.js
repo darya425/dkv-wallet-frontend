@@ -23,9 +23,6 @@ const StatView = lazy(() =>
 const CurrencyView = lazy(() =>
   import('./Pages/CurrencyView' /* webpackChunkName: "CurrencyView"*/),
 );
-const DiagramView = lazy(() =>
-  import('./Pages/DiagramView' /* webpackChunkName: "DiagramView"*/),
-);
 
 const App = () => {
   return (
@@ -36,27 +33,27 @@ const App = () => {
             <Route
               path="/"
               element={
-                // <PrivateRoute>
+                <PrivateRoute>
                   <HomeView />
-                // </PrivateRoute>
+                </PrivateRoute>
               }
             />
 
             <Route
               path="/statistics"
               element={
-                // <PrivateRoute>
+                <PrivateRoute>
                   <StatView />
-                // </PrivateRoute>
+                </PrivateRoute>
               }
             />
 
             <Route
               path="/currency"
               element={
-                // <PrivateRoute>
+                <PrivateRoute>
                   <CurrencyView />
-                // </PrivateRoute>
+                </PrivateRoute>
               }
             />
 
@@ -65,14 +62,6 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <p>User</p>
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/diagram"
-              element={
-                <PrivateRoute>
-                  <DiagramView />
                 </PrivateRoute>
               }
             />
