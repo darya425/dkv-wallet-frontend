@@ -5,9 +5,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import PrivateRoute from './Components/Navigation/PrivateRoute';
 import PublicRoute from './Components/Navigation/PublicRoute';
 
-import Navigation from './Components/Navigation';
 import Container from './Components/UI/Container';
 import muiTheme from './Components/UI/muiTheme';
+
 const LoginView = lazy(() =>
   import('./Pages/LoginView' /* webpackChunkName: "LoginView"*/),
 );
@@ -17,16 +17,17 @@ const RegisterView = lazy(() =>
 const HomeView = lazy(() =>
   import('./Pages/HomeView' /* webpackChunkName: "HomeView"*/),
 );
-const DiagramView = lazy(() =>
-  import('./Pages/DiagramView' /* webpackChunkName: "DiagramView"*/),
+const StatView = lazy(() =>
+  import('./Pages/StatView' /* webpackChunkName: "StatView"*/),
+);
+const CurrencyView = lazy(() =>
+  import('./Pages/CurrencyView' /* webpackChunkName: "CurrencyView"*/),
 );
 
 const App = () => {
   return (
     <ThemeProvider theme={muiTheme}>
       <Container>
-        {/* <Navigation /> */}
-
         <Suspense fallback={'Loading...'}>
           <Routes>
             <Route
@@ -39,18 +40,28 @@ const App = () => {
             />
 
             <Route
+              path="/statistics"
+              element={
+                <PrivateRoute>
+                  <StatView />
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/currency"
+              element={
+                <PrivateRoute>
+                  <CurrencyView />
+                </PrivateRoute>
+              }
+            />
+
+            <Route
               path="/user"
               element={
                 <PrivateRoute>
                   <p>User</p>
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/diagram"
-              element={
-                <PrivateRoute>
-                  <DiagramView />
                 </PrivateRoute>
               }
             />
