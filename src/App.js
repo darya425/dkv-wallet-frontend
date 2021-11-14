@@ -8,6 +8,7 @@ import PublicRoute from './Components/Navigation/PublicRoute';
 import Navigation from './Components/Navigation';
 import Container from './Components/UI/Container';
 import muiTheme from './Components/UI/muiTheme';
+
 const LoginView = lazy(() =>
   import('./Pages/LoginView' /* webpackChunkName: "LoginView"*/),
 );
