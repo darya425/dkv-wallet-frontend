@@ -1,0 +1,27 @@
+@import '../../Styles/main.scss';
+
+.navContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 13px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.link {
+  display: inline-block;
+  padding: 6px;
+
+  color: white;
+  background-color: #6e78e8;
+  border-radius: 6px;
+
+  &:not(:first-child) {
+    margin-left: 36px;
+  }
+}
+
+.activeLink {
+  background-color: #4a56e2;
+  filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));
+}

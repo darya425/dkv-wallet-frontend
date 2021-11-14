@@ -1,17 +1,14 @@
 import Navigation from '../../Components/Navigation';
-// import Currency from '../../Components/Currency';
-import Balance from '../../Components/Balance';
-// import UserData from '../../Components/UserData';
 
 import styles from '../../Styles/main.scss';
 
-export default function HomeView() {
+export default function StatView() {
   return (
     <>      
       <div className={ styles.info }>
         <div className={ styles.main }>
-            <Navigation /> 
-            <Balance />
+          <Navigation /> 
+          {/* <Balance /> */}
         </div>
           {/* <Currency /> */}
       </div>
