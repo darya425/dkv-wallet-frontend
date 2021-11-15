@@ -1,0 +1,27 @@
+.chartContainer {
+	margin: 0 auto;
+	max-width: 100%;
+	position: relative;
+	min-width: 280px;
+	max-width: 320px;
+  }
+  
+.statisticsTitle {
+	font-size: 30px;
+	line-height: 45px;
+	margin: 0;
+	margin-bottom: 10px;
+}
+  
+.chartInside {
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	top: 55%;
+	right: 20%;
+	left: 20%;
+	z-index: 1;
+	font-size: 18px;
+	margin: 0;
+}
+  
