@@ -1,0 +1,97 @@
+@import '../../Styles/main.scss';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  color: $text-grey4;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+
+  @media screen and (min-width: $tablet) {
+    padding: 20px 0;
+  }
+}
+
+.logoText {
+  @include font-data($font-poppins, 22px, $text-black, 700, 1.5);
+
+  @media screen and (min-width: $tablet) {
+    @include font-data($font-poppins, 30px);
+  }
+}
+
+.headerIcon {
+  margin-right: 16px;
+
+  @media screen and (min-width: $tablet) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.nameMenu {
+  display: flex;
+  align-items: center;
+  padding: 18px 0;
+
+  @media screen and (min-width: $tablet) {
+    padding: 25px 0;
+  }
+}
+
+.name {
+  @include font-data($font-circe, 18px, false, 400, 1.3);
+
+  @media screen and (min-width: $tablet) {
+    position: relative;
+    margin-right: 30px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: -15px;
+      bottom: -1px;
+      display: block;
+      background-color: $text-grey4;
+      width: 1px;
+      height: 30px;
+    }
+  }
+}
+
+// .name span {
+//   margin-right: 30px;
+// }
+
+.logoutIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.logoutButton {
+  display: flex;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin-left: 10px;
+  text-align: center;
+
+  @media screen and (min-width: $tablet) {
+    margin-left: 0;
+  }
+}
+
+.buttonText {
+  display: none;
+
+  @media screen and (min-width: $tablet) {
+    display: block;
+    color: $text-grey4;
+    margin-left: 10px;
+    @include font-data($font-circe, 18px, false, 400, 1.3);
+  }
+}
