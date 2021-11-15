@@ -1,0 +1,23 @@
+@import '../../Styles/main.scss';
+
+.balanceContainer {
+  margin-top: 10px;
+  padding-top: 8px;
+  padding-bottom: 13px;
+  padding-left: 30px;
+  padding-right: 30px;
+
+  background-color: white;
+  border-radius: 30px;
+}
+
+.balanceText {
+  margin-bottom: 10px;
+
+  text-transform: uppercase;
+  @include font-data($font-circe, 12px, #a6a6a6, 400, 0.67);
+}
+
+.balance {
+  @include font-data($font-poppins, 30px, #000, 700, 0.67);
+}
