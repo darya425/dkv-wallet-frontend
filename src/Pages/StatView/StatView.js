@@ -1,18 +1,20 @@
+import InfoBlock from '../../Components/InfoBlock';
 import Navigation from '../../Components/Navigation';
+// import StatData from '../../Components/UserData';
 
-import styles from '../../Styles/main.scss';
+import styles from './statView.module.scss';
 
 export default function StatView() {
   return (
-    <>      
-      <div className={ styles.info }>
-        <div className={ styles.main }>
-          <Navigation /> 
-          {/* <Balance /> */}
-        </div>
-          {/* <Currency /> */}
+    <>
+      <div className={styles.hiddenNav}>
+        <Navigation />
       </div>
-        {/* <UserData /> */}
+      <div className={styles.hiddenInfo}>
+        <InfoBlock />
+      </div>      
+      
+      {/* <StatData /> */}
     </>
   );
 }

@@ -8,10 +8,11 @@ import muiTheme from '../UI/muiTheme';
 
 const iconSize = {
     mobile: 27,
-    higher: 12,
+    higher: 18,
 };
 
 const sxValues = {
+    paddingTop: "2px",
     fontSize: iconSize.mobile,
     [muiTheme.breakpoints.up('tablet')]: {
         fontSize: iconSize.higher,
@@ -26,11 +27,15 @@ export default function Navigation() {
                 to="/"
                 exact={true}
                 className={styles.link}
+                
                 activeClassName={styles.activeLink}
             >
-                <HomeIcon
-                    sx={sxValues}
-                />                    
+                <div className={styles.icon}>
+                    <HomeIcon
+                        sx={sxValues}
+                    />
+                </div>
+                <h3 className={styles.navText+' '+styles.hiddenText}>Main</h3>
             </NavLink>
 
             <NavLink                    
@@ -39,9 +44,12 @@ export default function Navigation() {
                 className={styles.link}
                 activeClassName={styles.activeLink}
             >
-                <QueryStatsIcon
-                    sx={sxValues}
-                />
+                <div className={styles.icon}>
+                    <QueryStatsIcon
+                        sx={sxValues}
+                    />
+                </div>                
+                <h3 className={styles.navText+' '+styles.hiddenText}>Statistics</h3>
             </NavLink>
 
             <NavLink                
@@ -50,9 +58,11 @@ export default function Navigation() {
                 className={styles.link+' '+styles.hidden}
                 activeClassName={styles.activeLink}
             >
-                <EuroIcon
-                    sx={sxValues}
-                />
+                <div className={styles.icon}>
+                    <EuroIcon
+                        sx={sxValues}
+                    />
+                </div>
             </NavLink>
         </nav>      
     );    

@@ -1,0 +1,13 @@
+@import '../../Styles/main.scss';
+
+.hiddenNav {
+  @media screen and (min-width: $tablet) {
+    @include visually-hidden;
+  }
+}
+
+.hiddenInfo {
+  @media screen and (max-width: $max-mobile) {
+    @include visually-hidden;
+  }
+}

@@ -1,0 +1,44 @@
+@import '../../Styles/main.scss';
+
+.info {
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    display: inline-block;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 43px;
+    padding-right: 30px;
+  }
+}
+
+.balvanka {
+  margin-left: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 334px;
+  height: 174px;
+  color: lightgreen;
+  background-color: #4a56e2;
+  border-radius: 30px;
+
+  @media screen and (min-width: $desktop) {
+    margin-left: 0px;
+    margin-top: 30px;
+    width: 350px;
+  }
+}
+
+.hidden {
+  @media screen and (max-width: $max-mobile) {
+    @include visually-hidden;
+  }
+}
