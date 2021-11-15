@@ -1,7 +1,10 @@
 @import '../../Styles/main.scss';
 
 .balanceContainer {
-  margin-top: 10px;
+  width: 280px;
+  margin-top: 13px;
+  margin-left: auto;
+  margin-right: auto;
   padding-top: 8px;
   padding-bottom: 13px;
   padding-left: 30px;
@@ -9,6 +12,17 @@
 
   background-color: white;
   border-radius: 30px;
+
+  @media screen and (min-width: $tablet) {
+    width: 334px;
+    margin-top: 20px;
+    margin-left: 0px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 350px;
+    margin-top: 30px;
+  }
 }
 
 .balanceText {
