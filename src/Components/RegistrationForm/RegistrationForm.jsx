@@ -1,7 +1,7 @@
-import routes from '../../routs';
+import routes from '';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { authOperations } from '../../redux/auth';
+import { authOperations } from '../../Redux/auth';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import styles from './RegistrationForm.module.css';
@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 const RegistrationForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  let history = useHistory();
+  let push = useHistory();
 
   const {
     handleSubmit,
@@ -86,7 +86,7 @@ const RegistrationForm = () => {
     }),
     onSubmit: ({ email, password, name }) => {
       dispatch(authOperations.register({ email, password, name }));
-      history(routes.login);
+      push(routes.login);
     },
   });
 
