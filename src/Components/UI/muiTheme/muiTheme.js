@@ -17,18 +17,20 @@ const muiTheme = createTheme({
             purple: "#C5BAFF",
         },
     },
+    breakpoints: {
+        values: {
+        mobile: 320,
+        tablet: 768,
+        desktop: 1280,
+        },
+    },
     typography: {
         fontFamily: [
         'Poppins',
         'circe',
         'sans-serif',
-        ].join(','),
-        // custom: {
-        //     fontSize: 20,
-        //     fontWeight: 700,
-        //     fontFamily: 'Poppins',
-        // }
-     },
+        ].join(','),        
+    },
 });
 
 export default muiTheme;

@@ -1,0 +1,48 @@
+@import '../../Styles/main.scss';
+
+.navContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 13px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media screen and (min-width: $tablet) {
+    // flex-wrap: wrap;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: left;
+  }
+}
+
+.link {
+  display: inline-block;
+  padding: 6px;
+
+  color: white;
+  background-color: #6e78e8;
+  border-radius: 6px;
+
+  &:not(:first-child) {
+    margin-left: 36px;
+  }
+
+  @media screen and (min-width: $tablet) {
+    padding: 3px;
+
+    &:not(:first-child) {
+      margin-left: 0px;
+    }
+  }
+}
+
+.activeLink {
+  background-color: #4a56e2;
+  filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));
+}
+
+.hidden {
+  @media screen and (min-width: $tablet) {
+    @include visually-hidden;
+  }
+}

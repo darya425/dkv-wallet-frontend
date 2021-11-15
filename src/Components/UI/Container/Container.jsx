@@ -1,4 +1,4 @@
-import { container } from './Container.module.css';
+import { container } from './Container.module.scss';
 
 const Container = ({ children }) => {
   return <div className={container}>{children}</div>;
