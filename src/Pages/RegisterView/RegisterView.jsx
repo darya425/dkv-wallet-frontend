@@ -1,4 +1,5 @@
 import styles from './RegisterView.module.scss';
+import RegistrationForm from '../../Components/RegistrationForm/RegistrationForm';
 
 function RegisterView() {
   return (
@@ -10,6 +11,7 @@ function RegisterView() {
         </div>
 
         <div className={styles.formWrapper}>
+          <RegistrationForm />
         </div>
       </div>
     </div>
