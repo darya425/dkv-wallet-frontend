@@ -30,8 +30,8 @@ const App = () => {
   return (
     <ThemeProvider theme={muiTheme}>
       <Container>
-        <BOLWANKA_API />
-        {/* <Suspense fallback={'Loading...'}>
+        {/* <BOLWANKA_API /> */}
+        <Suspense fallback={'Loading...'}>
           <Routes>
             <Route
               path="/"
@@ -91,7 +91,7 @@ const App = () => {
               }
             />
           </Routes>
-        </Suspense> */}
+        </Suspense>
       </Container>
     </ThemeProvider>
   );

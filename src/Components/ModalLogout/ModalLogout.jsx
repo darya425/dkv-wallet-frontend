@@ -1,25 +1,19 @@
-import { makeStyles } from '@material-ui/core/styles';
-import { Modal, Backdrop, Fade, Button } from '@material-ui/core';
+import { Button, Modal, Backdrop, Fade } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { authOperations } from '../../Redux/auth';
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    borderRadius: "20px",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(5, 5, 5),
-  },
-  button: {
-    borderRadius: "20px",
-  }
-}));
+import styles from './ModalLogout.module.scss';
+import useStyles from './stylesMUI';
 
 const ModalLogout = ({open, toggleModal}) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(authOperations.logOut());
+  }
+
   return (
     <Modal
       aria-labelledby="transition-modal-title"
@@ -35,9 +29,33 @@ const ModalLogout = ({open, toggleModal}) => {
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          <p id="transition-modal-description">Are you sure?</p>
-          <Button variant="contained" color="primary" className={classes.button}>Yes</Button>
-          <Button variant="outlined" color="primary" className={classes.button} onClick={toggleModal}>No</Button>
+          <p id="transition-modal-description" className={styles.modalText}>Are you sure?</p>
+          <div className={classes.buttonContainer}>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{
+                borderRadius: '20px',
+                marginBottom: '10px',
+                boxShadow: 'none',
+                width: '100%'
+              }}
+              onClick={handleLogout}
+            >
+              Yes
+            </Button>
+            <Button
+              variant="outlined"
+              color="secondary"
+              sx={{
+                borderRadius: '20px',
+                width: '100%'
+              }}
+              onClick={toggleModal}
+            >
+              No
+            </Button>
+          </div>
         </div>
       </Fade>
     </Modal>
