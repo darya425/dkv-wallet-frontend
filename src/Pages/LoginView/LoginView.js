@@ -1,8 +1,10 @@
 import styles from './LoginView.module.scss';
+// import Header from '../../Components/Header';
 
 function LoginView() {
   return (
     <>
+      {/* <Header/> */}
       <div className={styles.container}>
         <div className={styles.containerBg}>
           <div className={styles.imgWrapper}>

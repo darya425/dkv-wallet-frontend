@@ -20,7 +20,7 @@
   @include font-data($font-poppins, 22px, $text-black, 700, 1.5);
 
   @media screen and (min-width: $tablet) {
-    @include font-data($font-poppins, 30px);
+    @include font-data(false, 30px);
   }
 }
 

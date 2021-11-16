@@ -1,0 +1,11 @@
+@import '../../Styles/main.scss';
+
+.modalText {
+  @include font-data($font-poppins, 24px, $text-black, 400, 1.5);
+  text-align: center;
+  margin-bottom: 40px;
+
+  @media screen and (min-width: $tablet) {
+    @include font-data($font-poppins, 30px, $text-black, 400, 1.5);
+  }
+}
