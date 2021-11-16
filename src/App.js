@@ -32,7 +32,7 @@ const App = () => {
       <Container>
         {/* <BOLWANKA_API /> */}
         <Suspense fallback={'Loading...'}>
-          <Routes>
+          {/* <Routes>
             <Route
               path="/"
               element={
@@ -67,7 +67,7 @@ const App = () => {
                   <p>User</p>
                 </PrivateRoute>
               }
-            />
+            /> */}
 
             <Route
               path="/login"
@@ -80,7 +80,7 @@ const App = () => {
               }
             />
 
-            <Route
+            {/* <Route
               path="/register"
               redirectTo="/login"
               restricted
@@ -90,7 +90,7 @@ const App = () => {
                 </PublicRoute>
               }
             />
-          </Routes>
+          </Routes> */}
         </Suspense>
       </Container>
     </ThemeProvider>
