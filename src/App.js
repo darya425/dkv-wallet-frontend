@@ -5,6 +5,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import PrivateRoute from './Components/Navigation/PrivateRoute';
 import PublicRoute from './Components/Navigation/PublicRoute';
 
+import BOLWANKA_API from './BOLWANKA-API';
+
 import Container from './Components/UI/Container';
 import muiTheme from './Components/UI/muiTheme';
 
@@ -28,7 +30,8 @@ const App = () => {
   return (
     <ThemeProvider theme={muiTheme}>
       <Container>
-        <Suspense fallback={'Loading...'}>
+        <BOLWANKA_API />
+        {/* <Suspense fallback={'Loading...'}>
           <Routes>
             <Route
               path="/"
@@ -88,7 +91,7 @@ const App = () => {
               }
             />
           </Routes>
-        </Suspense>
+        </Suspense> */}
       </Container>
     </ThemeProvider>
   );
