@@ -25,7 +25,7 @@ export default function Navigation() {
         <nav className={styles.navContainer}>
             <NavLink
                 to="/"
-                exact={true}
+                exact
                 className={styles.link}
                 
                 activeClassName={styles.activeLink}
@@ -40,7 +40,7 @@ export default function Navigation() {
 
             <NavLink                    
                 to="/statistics"
-                exact={true}
+                exact
                 className={styles.link}
                 activeClassName={styles.activeLink}
             >
@@ -54,7 +54,7 @@ export default function Navigation() {
 
             <NavLink                
                 to="/currency"
-                exact={true}
+                exact
                 className={styles.link+' '+styles.hidden}
                 activeClassName={styles.activeLink}
             >
