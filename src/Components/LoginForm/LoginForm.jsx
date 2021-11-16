@@ -118,7 +118,7 @@ const LoginForm = () => {
           }}
         />
         <div className={styles.btnWrapper}>
-          <Button className={styles.button}
+          <Button className={styles.btn}
             variant="outlined"
             color="primary"
             type="submit"
@@ -132,7 +132,7 @@ const LoginForm = () => {
           >
             Sign in
           </Button>
-          <Button className={styles.button}
+          <Button className={styles.btn}
           variant="outlined"
           color="primary"
           type="submit"
@@ -142,7 +142,8 @@ const LoginForm = () => {
             maxWidth: 280,
             borderRadius: 20,
             padding: '13px 68px',
-          }}>
+          }}
+          >
               {/* <Link  */}
         {/* //   to={нужен путь} className={styles.linkBtn}  */} 
           {/* > */}
