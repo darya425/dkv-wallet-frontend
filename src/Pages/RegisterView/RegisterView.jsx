@@ -11,7 +11,7 @@ function RegisterView() {
         </div>
 
         <div className={styles.formWrapper}>
-          {/* <RegistrationForm /> */}
+          <RegistrationForm />
         </div>
       </div>
     </div>
