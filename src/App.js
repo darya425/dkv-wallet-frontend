@@ -55,10 +55,10 @@ const App = () => {
           <Route
             path="/home"
             element={
-              <PublicRoute>
+              <PrivateRoute>
                 <Header />
                 <HomeView />
-              </PublicRoute>
+              </PrivateRoute>
             }
           />
 
@@ -66,6 +66,7 @@ const App = () => {
             path="/statistics"
             element={
               <PrivateRoute>
+                <Header />
                 <StatView />
               </PrivateRoute>
             }
@@ -75,6 +76,7 @@ const App = () => {
             path="/currency"
             element={
               <PrivateRoute>
+                <Header />
                 <CurrencyView />
               </PrivateRoute>
             }
