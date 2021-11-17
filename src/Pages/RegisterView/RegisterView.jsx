@@ -12,6 +12,7 @@ function RegisterView() {
             <p className={styles.appName}>Finance App</p>
           </div>
 
+
           <div className={styles.formWrapper}>
             <RegistrationForm />
           </div>

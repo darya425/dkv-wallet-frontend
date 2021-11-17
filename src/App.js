@@ -30,17 +30,25 @@ const App = () => {
     <ThemeProvider theme={muiTheme}>
       <Suspense fallback={'Loading...'}>
         <Routes>
-          <Route
-            path="/"
-            redirectTo="/home"
-            restricted
-            exact
-            element={
-              <PublicRoute>
-                <LoginView />
-              </PublicRoute>
-            }
-          />
+            <Route
+              path="/"
+              element={
+                <PublicRoute>
+                  <LoginView />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path="/login"
+              redirectTo="/home"
+              restricted
+              element={
+                <PublicRoute>
+                  <LoginView />
+                </PublicRoute>
+              }
+            />
 
           <Route
             path="/register"
@@ -72,26 +80,17 @@ const App = () => {
             }
           />
 
-          <Route
-            path="/currency"
-            element={
-              <PrivateRoute>
-                <Header />
-                <CurrencyView />
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/user"
-            element={
-              <PrivateRoute>
-                <p>User</p>
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      </Suspense>
+            <Route
+              path="/currency"
+              element={
+                <PrivateRoute>
+                  <Header />
+                  <CurrencyView />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </Suspense>
     </ThemeProvider>
   );
 };
