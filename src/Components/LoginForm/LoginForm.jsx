@@ -4,9 +4,9 @@ import { authOperations } from '../../Redux/auth';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button from '@mui/material/Button';
-import { TextField, IconButton } from '@material-ui/core'; // поменять пути как в строке 6 и стилизовать
-import InputAdornment from '@material-ui/core/InputAdornment';
-import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
 import MailIcon from '@mui/icons-material/Mail';
 import LockIcon from '@mui/icons-material/Lock';
 import Visibility from '@mui/icons-material/Visibility';
@@ -15,23 +15,9 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import styles from './LoginForm.module.scss';
 import logo from '../RegistrationForm/icons/logo.png';
 
-const useStyles = makeStyles(theme => ({
-  width: {
-    maxWidth: 280,
-    width: '100%',
-    marginBottom: 40,
-    [theme.breakpoints.up('sm')]: {
-      maxWidth: 410,
-      width: '100%',
-      marginBottom: 40,
-    },
-  },
-}));
-
 const LoginForm = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
-  let push = useNavigate();
+  const push = useNavigate();
 
   const {
     handleSubmit,
@@ -57,9 +43,9 @@ const LoginForm = () => {
         .required('Required field'),
       showPassword: Yup.bool().default('false'),
     }),
-    onSubmit: ({ email, password, name}) => {
-      dispatch(authOperations.logIn({ email, password}));
-      push('/home');
+    onSubmit: async ({ email, password}) => {
+      await dispatch(authOperations.logIn({ email, password}));
+      await push('/home');
     },
   });
 
@@ -71,7 +57,8 @@ const LoginForm = () => {
       </div>
       <form onSubmit={handleSubmit} className={styles.form}>
         <TextField
-          className={classes.width}
+          sx={{marginBottom: "40px", minWidth: "100%"}}
+          variant="standard"
           name="email"
           type="email"
           values={values.email}
@@ -88,7 +75,8 @@ const LoginForm = () => {
           helperText={touched.email && errors.email}
         />
         <TextField
-          className={classes.width}
+          sx={{marginBottom: "40px", minWidth: "100%"}}
+          variant="standard"
           type={values.showPassword ? 'text' : 'password'}
           name="password"
           values={values.password}

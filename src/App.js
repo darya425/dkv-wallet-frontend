@@ -32,9 +32,17 @@ const App = () => {
           <Routes>
             <Route
               path="/"
+              element={
+                <PublicRoute>
+                  <LoginView />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path="/login"
               redirectTo="/home"
               restricted
-              exact
               element={
                 <PublicRoute>
                   <LoginView />
@@ -75,15 +83,6 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <CurrencyView />
-                </PrivateRoute>
-              }
-            />
-
-            <Route
-              path="/user"
-              element={
-                <PrivateRoute>
-                  <p>User</p>
                 </PrivateRoute>
               }
             />
