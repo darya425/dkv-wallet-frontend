@@ -1,11 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { authOperations, authSelectors } from '../../Redux/auth';
 import { usersOperations, usersSelectors } from '../../Redux/users';
 
 import styles from './balance.module.scss';
-
-// const myBalance = "55 634.27";
 
 const Balance = () => {
     const dispatch = useDispatch();
