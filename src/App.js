@@ -2,11 +2,15 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 
+import { useSelector } from 'react-redux';
+import { authSelectors } from './Redux/auth';
+
 import PrivateRoute from './Components/Navigation/PrivateRoute';
 import PublicRoute from './Components/Navigation/PublicRoute';
 
 import Container from './Components/UI/Container';
 import muiTheme from './Components/UI/muiTheme';
+import Header from './Components/Header';
 
 const LoginView = lazy(() =>
   import('./Pages/LoginView' /* webpackChunkName: "LoginView"*/),
@@ -25,8 +29,11 @@ const CurrencyView = lazy(() =>
 );
 
 const App = () => {
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
+
   return (
     <ThemeProvider theme={muiTheme}>
+      {isLoggedIn ? <Header />: <></>}
       <Container>
         <Suspense fallback={'Loading...'}>
           <Routes>
