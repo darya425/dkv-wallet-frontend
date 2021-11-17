@@ -1,19 +1,19 @@
 import routes from '';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../../Redux/auth';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import styles from './RegistrationForm.module.css';
+import styles from './RegistrationForm.module.scss';
 import logo from './icons/logo.png';
 import { TextField, Button, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import MailIcon from '@material-ui/icons/Mail';
-import LockIcon from '@material-ui/icons/Lock';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import MailIcon from '@mui/icons-material/Mail';
+import LockIcon from '@mui/icons-material/Lock';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const useStyles = makeStyles(theme => ({
   registerBtn: {
@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 const RegistrationForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  let push = useHistory();
+  let navigate = useNavigate();
 
   const {
     handleSubmit,
@@ -86,7 +86,7 @@ const RegistrationForm = () => {
     }),
     onSubmit: ({ email, password, name }) => {
       dispatch(authOperations.register({ email, password, name }));
-      push(routes.login);
+      navigate(routes.login);
     },
   });
 
