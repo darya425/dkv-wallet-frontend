@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import InfoBlock from '../../Components/InfoBlock';
-import Header from '../../Components/Header';
+import Container from '../../Components/UI/Container';
 import ButtonAddTransaction from '../../Components/ButtonAddTransaction';
 import ModalAddTransaction from '../../Components/ModalAddTransaction';
 // import UserData from '../../Components/UserData';
@@ -14,15 +14,14 @@ const [open, setShowModal] = useState(false);
   };
 
   return (
-    <>
-      <Header/>
+    <Container>
       <InfoBlock />
       
       {/* <UserData /> */}
 
       <ButtonAddTransaction toggleModal={ toggleModal}/>
       <ModalAddTransaction open={open} toggleModal={ toggleModal}/>
-    </>
+    </Container>
   );
 }
 

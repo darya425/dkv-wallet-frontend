@@ -1,12 +1,11 @@
 import Navigation from '../../Components/Navigation';
-import Header from '../../Components/Header';
+import Container from '../../Components/UI/Container';
 
 export default function CurrencyView() {
   return (
-    <>
-      <Header />
+    <Container>
       <Navigation />       
       {/* <Currency /> */}
-    </>
+    </Container>
   );
 }
