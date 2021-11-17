@@ -12,6 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { transactionsReducer } from './transactions';
 import { authReducer } from './auth';
+import { usersReducer } from './users';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -31,6 +32,7 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
     transactions: transactionsReducer,
+    users: usersReducer,
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development',

@@ -42,7 +42,7 @@ const ModalLogout = ({open, toggleModal}) => {
               }}
               onClick={handleLogout}
             >
-              Yes
+              YES
             </Button>
             <Button
               variant="outlined"
@@ -53,7 +53,7 @@ const ModalLogout = ({open, toggleModal}) => {
               }}
               onClick={toggleModal}
             >
-              No
+              NO
             </Button>
           </div>
         </div>
