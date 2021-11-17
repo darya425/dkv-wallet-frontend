@@ -5,7 +5,6 @@ import EuroIcon from '@mui/icons-material/Euro';
 
 import styles from './Navigation.module.scss';
 import muiTheme from '../UI/muiTheme';
-import { fontWeight } from '@mui/system';
 
 const iconSize = {
     mobile: 27,
@@ -20,7 +19,6 @@ const sxValues = {
     },
 }
 
-
 export default function Navigation() {
     return (
         <nav className={styles.navContainer}>
@@ -28,16 +26,13 @@ export default function Navigation() {
                 to="/home"
                 exact
                 className={styles.link}
-                // className={({ isActive }) => (isActive ? " styles.activeLink" : "styles.link")}
-                
             >
                 <div className={styles.icon}>
                     <HomeIcon
                         sx={sxValues}
                     />
                 </div>
-                <h3 className={styles.navText + ' ' + styles.hiddenText}
-                >Main</h3>
+                <h3 className={styles.navText + ' ' + styles.hiddenText}>Main</h3>
             </NavLink>
 
             <NavLink                    

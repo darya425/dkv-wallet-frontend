@@ -2,13 +2,9 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 
-import { useSelector } from 'react-redux';
-import { authSelectors } from './Redux/auth';
-
 import PrivateRoute from './Components/Navigation/PrivateRoute';
 import PublicRoute from './Components/Navigation/PublicRoute';
 
-import Container from './Components/UI/Container';
 import muiTheme from './Components/UI/muiTheme';
 import Header from './Components/Header';
 
@@ -29,74 +25,71 @@ const CurrencyView = lazy(() =>
 );
 
 const App = () => {
-  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
 
   return (
     <ThemeProvider theme={muiTheme}>
-      {isLoggedIn ? <Header />: <></>}
-      <Container>
-        <Suspense fallback={'Loading...'}>
-          <Routes>
-            <Route
-              path="/"
-              redirectTo="/home"
-              restricted
-              exact
-              element={
-                <PublicRoute>
-                  <LoginView />
-                </PublicRoute>
-              }
-            />
+      <Suspense fallback={'Loading...'}>
+        <Routes>
+          <Route
+            path="/"
+            redirectTo="/home"
+            restricted
+            exact
+            element={
+              <PublicRoute>
+                <LoginView />
+              </PublicRoute>
+            }
+          />
 
-            <Route
-              path="/register"
-              restricted
-              element={
-                <PublicRoute>
-                  <RegisterView />
-                </PublicRoute>
-              }
-            />
+          <Route
+            path="/register"
+            restricted
+            element={
+              <PublicRoute>
+                <RegisterView />
+              </PublicRoute>
+            }
+          />
 
-            <Route
-              path="/home"
-              element={
-                <PrivateRoute>
-                  <HomeView />
-                </PrivateRoute>
-              }
-            />
+          <Route
+            path="/home"
+            element={
+              <PublicRoute>
+                <Header />
+                <HomeView />
+              </PublicRoute>
+            }
+          />
 
-            <Route
-              path="/statistics"
-              element={
-                <PrivateRoute>
-                  <StatView />
-                </PrivateRoute>
-              }
-            />
+          <Route
+            path="/statistics"
+            element={
+              <PrivateRoute>
+                <StatView />
+              </PrivateRoute>
+            }
+          />
 
-            <Route
-              path="/currency"
-              element={
-                <PrivateRoute>
-                  <CurrencyView />
-                </PrivateRoute>
-              }
-            />
+          <Route
+            path="/currency"
+            element={
+              <PrivateRoute>
+                <CurrencyView />
+              </PrivateRoute>
+            }
+          />
 
-            <Route
-              path="/user"
-              element={
-                <PrivateRoute>
-                  <p>User</p>
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-        </Suspense>
-      </Container>
+          <Route
+            path="/user"
+            element={
+              <PrivateRoute>
+                <p>User</p>
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Suspense>
     </ThemeProvider>
   );
 };
