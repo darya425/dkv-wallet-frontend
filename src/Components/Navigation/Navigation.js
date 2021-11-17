@@ -26,8 +26,7 @@ export default function Navigation() {
             <NavLink
                 to="/"
                 exact
-                className={styles.link}
-                
+                className={styles.link}            
                 activeClassName={styles.activeLink}
             >
                 <div className={styles.icon}>
