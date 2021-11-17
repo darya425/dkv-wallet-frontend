@@ -5,8 +5,6 @@ import { ThemeProvider } from '@mui/material/styles';
 import PrivateRoute from './Components/Navigation/PrivateRoute';
 import PublicRoute from './Components/Navigation/PublicRoute';
 
-import BOLWANKA_API from './BOLWANKA-API';
-
 import Container from './Components/UI/Container';
 import muiTheme from './Components/UI/muiTheme';
 
@@ -30,11 +28,32 @@ const App = () => {
   return (
     <ThemeProvider theme={muiTheme}>
       <Container>
-        {/* <BOLWANKA_API /> */}
         <Suspense fallback={'Loading...'}>
           <Routes>
             <Route
               path="/"
+              redirectTo="/home"
+              restricted
+              exact
+              element={
+                <PublicRoute>
+                  <LoginView />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path="/register"
+              restricted
+              element={
+                <PublicRoute>
+                  <RegisterView />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path="/home"
               element={
                 <PrivateRoute>
                   <HomeView />
@@ -66,28 +85,6 @@ const App = () => {
                 <PrivateRoute>
                   <p>User</p>
                 </PrivateRoute>
-              }
-            />
-
-            <Route
-              path="/login"
-              redirectTo="/user"
-              restricted
-              element={
-                <PublicRoute>
-                  <LoginView />
-                </PublicRoute>
-              }
-            />
-
-            <Route
-              path="/register"
-              redirectTo="/login"
-              restricted
-              element={
-                <PublicRoute>
-                  <RegisterView />
-                </PublicRoute>
               }
             />
           </Routes>

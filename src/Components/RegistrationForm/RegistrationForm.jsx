@@ -1,19 +1,19 @@
-import routes from '';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../../Redux/auth';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import styles from './RegistrationForm.module.css';
-import logo from './icons/logo.png';
 import { TextField, Button, IconButton } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import MailIcon from '@material-ui/icons/Mail';
-import LockIcon from '@material-ui/icons/Lock';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { makeStyles } from '@material-ui/core/styles';
+import AccountBox from '@mui/icons-material/AccountBox';
+import MailIcon from '@mui/icons-material/Mail';
+import LockIcon from '@mui/icons-material/Lock';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+import styles from './RegistrationForm.module.scss';
+import logo from './icons/logo.png';
 
 const useStyles = makeStyles(theme => ({
   registerBtn: {
@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 const RegistrationForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  let push = useHistory();
+  let push = useNavigate();
 
   const {
     handleSubmit,
@@ -86,7 +86,7 @@ const RegistrationForm = () => {
     }),
     onSubmit: ({ email, password, name }) => {
       dispatch(authOperations.register({ email, password, name }));
-      push(routes.login);
+      push('/');
     },
   });
 
@@ -224,7 +224,7 @@ const RegistrationForm = () => {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <AccountBoxIcon htmlColor="#E0E0E0" />
+                <AccountBox htmlColor="#E0E0E0" />
               </InputAdornment>
             ),
           }}
@@ -245,7 +245,7 @@ const RegistrationForm = () => {
           >
             Sign up
           </Button>
-          <Link to={routes.login} className={styles.linkBtn}>
+          <Link to={'/'} className={styles.linkBtn}>
             Sign in
           </Link>
         </div>
