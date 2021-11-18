@@ -23,17 +23,6 @@ export default function HomeView() {
 
   return (
     <>
-      <BOLWANKA_API />
-      <Header />
-      <Grid container spacing={0}>
-        <Grid item desktop={4}>
-          <InfoBlock />
-        </Grid>
-        <Grid item desktop={8}>
-          <TransitionDashboard />
-        </Grid>
-      </Grid>
-
       <Container>
         <InfoBlock />
 
