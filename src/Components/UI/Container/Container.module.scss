@@ -4,15 +4,14 @@
   height: 100%;
   margin: 0 auto;
   padding: 0 20px;
-}
-@media screen and (min-width: $tablet) {
-  .container {
+  overflow: hidden;
+
+  @media screen and (min-width: $tablet) {
     padding: 0 40px;
   }
-}
-@media screen and (min-width: $desktop) {
-  .container {
-    max-width: 1500px;
+
+  @media screen and (min-width: $desktop) {
+    max-width: 1110px;
     padding: 0 85px;
   }
 }

@@ -6,6 +6,8 @@ import ButtonAddTransaction from '../../Components/ButtonAddTransaction';
 import ModalAddTransaction from '../../Components/ModalAddTransaction';
 // import UserData from '../../Components/UserData';
 
+import styles from './homeView.module.scss';
+
 export default function HomeView() {
 const [open, setShowModal] = useState(false);
 
@@ -14,14 +16,16 @@ const [open, setShowModal] = useState(false);
   };
 
   return (
-    <Container>
-      <InfoBlock />
-      
-      {/* <UserData /> */}
+    <div className={styles.visualContainer}>
+      <Container>
+        <InfoBlock />
+        
+        {/* <UserData /> */}
 
-      <ButtonAddTransaction toggleModal={ toggleModal}/>
-      <ModalAddTransaction open={open} toggleModal={ toggleModal}/>
-    </Container>
+        <ButtonAddTransaction toggleModal={ toggleModal}/>
+        <ModalAddTransaction open={open} toggleModal={ toggleModal}/>
+      </Container>
+    </div>
   );
 }
 
