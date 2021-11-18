@@ -4,7 +4,6 @@
   display: flex;
   justify-content: center;
   color: $text-grey4;
-  background-color: $header-background;
 
   @media screen and (min-width: $desktop) {
     justify-content: space-between;

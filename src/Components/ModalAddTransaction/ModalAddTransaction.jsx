@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Modal, Backdrop, Fade, Box, TextField, MenuItem, Button } from '@mui/material';
+import { Modal, Backdrop, Fade, Box, TextField, MenuItem, Button, FormControlLabel } from '@mui/material';
+import Switcher from './Switcher';
 
 const style = {
   position: 'absolute',
@@ -49,6 +50,10 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
           <Box sx={style}>
             <form>
               <p>ADD TRANSACTION</p>
+              <FormControlLabel
+                control={<Switcher sx={{ m: 1 }} defaultChecked />}
+                label=""
+              />
               <TextField
                 id="standard-select-currency"
                 select
@@ -67,6 +72,7 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
                 id="standard-basic"
                 variant="standard"
                 placeholder="0.00"
+                sx={{marginTop: '10px'}}
               />
               <TextField
                 id="date"
