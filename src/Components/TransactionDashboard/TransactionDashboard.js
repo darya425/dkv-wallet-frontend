@@ -1,17 +1,27 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { transactionSelectors, transactionOperations } from '../../Redux/transactions';
+import {
+  transactionSelectors,
+  transactionOperations,
+} from '../../Redux/transactions';
 
 import { usersSelectors } from '../../Redux/users';
 
-import { TableBody, Table, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import {
+  TableBody,
+  Table,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from '@mui/material';
 
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(muiTheme => ({
   table: {
     borderCollapse: 'inherit',
-    marginTop: '46px',
   },
   tableHeader: {
     backgroundColor: '#fff',
@@ -45,11 +55,16 @@ const useStyles = makeStyles(muiTheme => ({
 
 export default function TransactionDashboard() {
   const dispatch = useDispatch();
-  useEffect(() => dispatch(transactionOperations.getAllTransactions()), [dispatch]);
+  useEffect(
+    () => dispatch(transactionOperations.getAllTransactions()),
+    [dispatch],
+  );
 
   const classes = useStyles();
 
-  const allTransactions = useSelector(state => transactionSelectors.getAllTransactions(state));
+  const allTransactions = useSelector(state =>
+    transactionSelectors.getAllTransactions(state),
+  );
 
   return (
     allTransactions && (
@@ -79,16 +94,25 @@ export default function TransactionDashboard() {
           </TableHead>
           <TableBody className={classes.tableBody}>
             {allTransactions.map(transaction => (
-              <TableRow key={transaction._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableRow
+                key={transaction._id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
                 <TableCell component="td" scope="row" align="center">
                   {new Date(transaction.date).toLocaleDateString()}
                 </TableCell>
-                <TableCell align="center">{transaction.type === 'income' ? '+' : '-'}</TableCell>
+                <TableCell align="center">
+                  {transaction.type === 'income' ? '+' : '-'}
+                </TableCell>
                 <TableCell align="center">{transaction.category}</TableCell>
                 <TableCell align="center">{transaction.comment}</TableCell>
                 <TableCell
                   align="center"
-                  className={transaction.type === 'income' ? classes.incomeAmount : classes.expenseAmount}
+                  className={
+                    transaction.type === 'income'
+                      ? classes.incomeAmount
+                      : classes.expenseAmount
+                  }
                 >
                   {transaction.amount}
                 </TableCell>
