@@ -1,33 +1,35 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 import InfoBlock from '../../Components/InfoBlock';
+
+import BOLWANKA_API from '../../BOLWANKA-API';
+
 import Container from '../../Components/UI/Container';
 import ButtonAddTransaction from '../../Components/ButtonAddTransaction';
 import ModalAddTransaction from '../../Components/ModalAddTransaction';
-import Header from "../../Components/Header";
 // import UserData from '../../Components/UserData';
 
+import styles from './homeView.module.scss';
+
 export default function HomeView() {
-const [open, setShowModal] = useState(false);
+  const [open, setShowModal] = useState(false);
 
   const toggleModal = () => {
     setShowModal(prev => !prev);
   };
 
   return (
-    <>
-    <header style={{backgroundColor: '#fff'}}>
-      <Header/>
-    </header>
-    <Container>
-        <InfoBlock />
-      
-      {/* <UserData /> */}
 
-      <ButtonAddTransaction toggleModal={toggleModal}/>
-      <ModalAddTransaction open={open} toggleModal={toggleModal}/>
-    </Container>
-    </>
+    <div className={styles.visualContainer}>
+      <Container>
+        <InfoBlock />
+        
+        {/* <UserData /> */}
+
+        <ButtonAddTransaction toggleModal={ toggleModal}/>
+        <ModalAddTransaction open={open} toggleModal={ toggleModal}/>
+      </Container>
+    </div>
+
   );
 }
-

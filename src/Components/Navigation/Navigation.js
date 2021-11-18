@@ -24,7 +24,6 @@ export default function Navigation() {
         <nav className={styles.navContainer}>
             <NavLink
                 to="/home"
-                exact
                 className={styles.link}
             >
                 <div className={styles.icon}>
@@ -37,7 +36,6 @@ export default function Navigation() {
 
             <NavLink                    
                 to="/statistics"
-                exact
                 className={styles.link}
             >
                 <div className={styles.icon}>
@@ -50,7 +48,6 @@ export default function Navigation() {
 
             <NavLink                
                 to="/currency"
-                exact
                 className={styles.link+' '+styles.hidden}
             >
                 <div className={styles.icon}>
