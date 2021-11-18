@@ -1,0 +1,28 @@
+@import '../../Styles/main.scss';
+
+.modalText {
+  @include font-data($font-poppins, 24px, $text-black, 400, 1.5);
+  text-align: center;
+  margin-bottom: 40px;
+
+  @media screen and (min-width: $tablet) {
+    @include font-data($font-poppins, 30px, $text-black, 400, 1.5);
+  }
+}
+
+.switcherText {
+  @include font-data($font-circe, 16px, $text-grey5, 700, 1.5);
+}
+
+.red {
+  color: $main-red;
+}
+
+.green {
+  color: $main-green;
+}
+
+.switcherContainer {
+  text-align: center;
+  margin-bottom: 40px;
+}

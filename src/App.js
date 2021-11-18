@@ -6,7 +6,7 @@ import PrivateRoute from './Components/Navigation/PrivateRoute';
 import PublicRoute from './Components/Navigation/PublicRoute';
 
 import muiTheme from './Components/UI/muiTheme';
-// import Header from './Components/Header';
+import Header from './Components/Header';
 
 const LoginView = lazy(() =>
   import('./Pages/LoginView' /* webpackChunkName: "LoginView"*/),
@@ -64,7 +64,7 @@ const App = () => {
             path="/home"
             element={
               <PrivateRoute>
-                {/* <Header /> */}
+                <Header />
                 <HomeView />
               </PrivateRoute>
             }
@@ -74,7 +74,7 @@ const App = () => {
             path="/statistics"
             element={
               <PrivateRoute>
-                {/* <Header /> */}
+                <Header />
                 <StatView />
               </PrivateRoute>
             }
@@ -84,7 +84,7 @@ const App = () => {
               path="/currency"
               element={
                 <PrivateRoute>
-                  {/* <Header /> */}
+                  <Header />
                   <CurrencyView />
                 </PrivateRoute>
               }

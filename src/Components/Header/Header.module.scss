@@ -41,6 +41,7 @@
   display: flex;
   align-items: center;
   padding: 18px 0;
+  color: $text-grey4;
 
   @media screen and (min-width: $tablet) {
     padding: 25px 0;
@@ -67,15 +68,6 @@
   }
 }
 
-// .name span {
-//   margin-right: 30px;
-// }
-
-.logoutIcon {
-  width: 18px;
-  height: 18px;
-}
-
 .logoutButton {
   display: flex;
   border: none;
@@ -83,9 +75,24 @@
   padding: 0;
   margin-left: 10px;
   text-align: center;
+  cursor: pointer;
+
+  & :hover {
+    color: $main-green;
+  }
 
   @media screen and (min-width: $tablet) {
     margin-left: 0;
+  }
+}
+
+.logoutIcon {
+  fill: currentColor;
+  width: 18px;
+  height: 18px;
+
+  & :hover {
+    fill: $main-green;
   }
 }
 

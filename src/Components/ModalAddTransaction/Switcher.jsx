@@ -13,7 +13,7 @@ const Switcher = styled(Switch)(() => ({
     padding: 0,
     transform: 'translateX(0)',
     '&.Mui-checked': {
-      transform: 'translate(38px,1px)',
+      transform: 'translate(40px,1px)',
       '& .MuiSwitch-thumb': {
         backgroundColor: "#FF6596",
       },
