@@ -1,12 +1,14 @@
 @import '../../Styles/main.scss';
 
 .container {
-  width: 320px;
+  width: 100vw;
+  height: 100vh;
   background-color: $main-white;
   padding: 110px 20px;
 
   @media screen and (min-width: $tablet) {
     width: 540px;
+    height: 468px;
     padding: 50px 65px;
     border-radius: 20px;
   }
