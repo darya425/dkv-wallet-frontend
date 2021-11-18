@@ -1,11 +1,12 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { authOperations, authSelectors } from './Redux/auth';
 
 import PrivateRoute from './Components/Navigation/PrivateRoute';
 import PublicRoute from './Components/Navigation/PublicRoute';
 
-import muiTheme from './Components/UI/muiTheme';
 import Header from './Components/Header';
 
 const LoginView = lazy(() =>
@@ -25,36 +26,45 @@ const CurrencyView = lazy(() =>
 );
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  const isFetchingCurrentUser = useSelector(
+    authSelectors.getIsFetchingCurrentUser,
+  );
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
 
   return (
-    <ThemeProvider theme={muiTheme}>
+    !isFetchingCurrentUser && (
       <Suspense fallback={'Loading...'}>
         <Routes>
-            <Route
-              path="/"
-              element={
-                <PublicRoute>
-                  <LoginView />
-                </PublicRoute>
-              }
-            />
+          {/* <Route
+            path="/"
+            element={
+              <PublicRoute>
+                <LoginView />
+              </PublicRoute>
+            }
+          /> */}
 
-            <Route
-              path="/login"
-              redirectTo="/home"
-              restricted
-              element={
-                <PublicRoute>
-                  <LoginView />
-                </PublicRoute>
-              }
-            />
+          <Route
+            path="/login"
+            redirectTo="/home"
+            restricted
+            element={
+              <PublicRoute restricted>
+                <LoginView />
+              </PublicRoute>
+            }
+          />
 
           <Route
             path="/register"
             restricted
             element={
-              <PublicRoute>
+              <PublicRoute restricted>
                 <RegisterView />
               </PublicRoute>
             }
@@ -80,18 +90,18 @@ const App = () => {
             }
           />
 
-            <Route
-              path="/currency"
-              element={
-                <PrivateRoute>
-                  <Header />
-                  <CurrencyView />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-        </Suspense>
-    </ThemeProvider>
+          <Route
+            path="/currency"
+            element={
+              <PrivateRoute>
+                <Header />
+                <CurrencyView />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Suspense>
+    )
   );
 };
 
