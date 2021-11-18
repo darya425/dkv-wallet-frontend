@@ -5,10 +5,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import PrivateRoute from './Components/Navigation/PrivateRoute';
 import PublicRoute from './Components/Navigation/PublicRoute';
 
-import BOLWANKA_API from './BOLWANKA-API';
-
-import Container from './Components/UI/Container';
 import muiTheme from './Components/UI/muiTheme';
+import Header from './Components/Header';
 
 const LoginView = lazy(() =>
   import('./Pages/LoginView' /* webpackChunkName: "LoginView"*/),
@@ -27,52 +25,13 @@ const CurrencyView = lazy(() =>
 );
 
 const App = () => {
+
   return (
     <ThemeProvider theme={muiTheme}>
-      <Container>
-        {/* <BOLWANKA_API /> */}
-        <Suspense fallback={'Loading...'}>
-          <Routes>
+      <Suspense fallback={'Loading...'}>
+        <Routes>
             <Route
               path="/"
-              element={
-                <PrivateRoute>
-                  <HomeView />
-                </PrivateRoute>
-              }
-            />
-
-            <Route
-              path="/statistics"
-              element={
-                <PrivateRoute>
-                  <StatView />
-                </PrivateRoute>
-              }
-            />
-
-            <Route
-              path="/currency"
-              element={
-                <PrivateRoute>
-                  <CurrencyView />
-                </PrivateRoute>
-              }
-            />
-
-            <Route
-              path="/user"
-              element={
-                <PrivateRoute>
-                  <p>User</p>
-                </PrivateRoute>
-              }
-            />
-
-            <Route
-              path="/login"
-              redirectTo="/user"
-              restricted
               element={
                 <PublicRoute>
                   <LoginView />
@@ -81,18 +40,57 @@ const App = () => {
             />
 
             <Route
-              path="/register"
-              redirectTo="/login"
+              path="/login"
+              redirectTo="/home"
               restricted
               element={
                 <PublicRoute>
-                  <RegisterView />
+                  <LoginView />
                 </PublicRoute>
+              }
+            />
+
+          <Route
+            path="/register"
+            restricted
+            element={
+              <PublicRoute>
+                <RegisterView />
+              </PublicRoute>
+            }
+          />
+
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute>
+                <Header />
+                <HomeView />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/statistics"
+            element={
+              <PrivateRoute>
+                <Header />
+                <StatView />
+              </PrivateRoute>
+            }
+          />
+
+            <Route
+              path="/currency"
+              element={
+                <PrivateRoute>
+                  <Header />
+                  <CurrencyView />
+                </PrivateRoute>
               }
             />
           </Routes>
         </Suspense>
-      </Container>
     </ThemeProvider>
   );
 };

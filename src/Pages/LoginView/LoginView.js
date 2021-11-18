@@ -1,22 +1,22 @@
+import LoginForm from '../../Components/LoginForm';
 import styles from './LoginView.module.scss';
-// import Header from '../../Components/Header';
+import guy from '../../Images/frameGuy.png';
+import Container from '../../Components/UI/Container';
 
 function LoginView() {
   return (
-    <>
-      {/* <Header/> */}
+    <Container>
       <div className={styles.container}>
-        <div className={styles.containerBg}>
-          <div className={styles.imgWrapper}>
-            <div className={styles.img} />
-            <p className={styles.appName}>Finance App</p>
-          </div>
+        <div className={styles.imgWrapper}>
+          <img src={guy} alt="guy" className={styles.img} />
+          <p className={styles.appName}>Finance App</p>
+        </div>
 
-          <div className={styles.formWrapper}>
-          </div>
+        <div className={styles.formWrapper}>
+          <LoginForm />
         </div>
       </div>
-    </>
+    </Container>
   );
 }
 
