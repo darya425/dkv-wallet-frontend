@@ -6,6 +6,7 @@ import LogoutIcon from "./LogoutIcon";
 
 import styles from "./Header.module.scss";
 import ModalLogout from "../ModalLogout";
+import Container from '../UI/Container';
 
 const Header = () => {
   const [open, setShowModal] = useState(false);
@@ -15,23 +16,27 @@ const Header = () => {
   };
 
   return (
-  <header className={styles.header}>
-    <Link to="/">
-      <div className={styles.logo}>
-        <HeaderIcon className={styles.headerIcon}/>
-        <span className={styles.logoText}>Wallet</span>
-      </div>
-    </Link>
-    <div className={styles.nameMenu}>
-      <div className={styles.name}>  
-        <span>Name</span>
-      </div>
-      <button className={styles.logoutButton} onClick={toggleModal}>
-        <LogoutIcon className={styles.logoutIcon} />
-        <span className={styles.buttonText}>Exit</span>
-      </button>
-    </div>
-    <ModalLogout open={open} toggleModal={toggleModal}/>
+    <header className={styles.header}>
+      <Container>
+        <div className={styles.headContainer}>
+          <Link to="/">
+          <div className={styles.logo}>
+            <HeaderIcon className={styles.headerIcon}/>
+            <span className={styles.logoText}>Wallet</span>
+          </div>
+        </Link>
+        <div className={styles.nameMenu}>
+          <div className={styles.name}>  
+            <span>Name</span>
+          </div>
+          <button className={styles.logoutButton} onClick={toggleModal}>
+            <LogoutIcon className={styles.logoutIcon} />
+            <span className={styles.buttonText}>Exit</span>
+          </button>
+        </div>
+        <ModalLogout open={open} toggleModal={toggleModal}/>
+        </div>      
+    </Container>
   </header>
   )
 }

@@ -1,0 +1,36 @@
+@import '../../Styles/main.scss';
+
+.visualContainer {
+  backdrop-filter: blur(50px);
+  height: 90vh;
+
+  &::before {
+    display: none;
+    content: url('../../Images/UpPart.png');
+    position: absolute;
+    top: 80;
+    right: 0;
+    z-index: -1;
+
+    @media screen and (min-width: $tablet) {
+      display: block;
+    }
+
+    @media screen and (min-width: $desktop) {
+      content: url('../../Images/UpPartDesk.png');
+    }
+  }
+
+  &::after {
+    display: none;
+    content: url('../../Images/LowPart.png');
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    z-index: -1;
+
+    @media screen and (min-width: $tablet) {
+      display: block;
+    }
+  }
+}

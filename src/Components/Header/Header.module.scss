@@ -1,25 +1,22 @@
 @import '../../Styles/main.scss';
 
 .header {
-  display: flex;
-  justify-content: center;
   color: $text-grey4;
   background-color: $header-background;
+}
 
-  @media screen and (min-width: $desktop) {
-    justify-content: space-between;
-  }
+.headContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .logo {
   display: flex;
   align-items: center;
   padding: 15px 0;
-  margin-right: 100px;
 
   @media screen and (min-width: $tablet) {
     padding: 20px 0;
-    margin-right: 402px;
   }
 }
 
