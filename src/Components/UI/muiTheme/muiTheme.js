@@ -1,6 +1,5 @@
 import { createTheme } from '@mui/material/styles';
 
-
 const muiTheme = createTheme({
   palette: {
     primary: {
@@ -10,6 +9,9 @@ const muiTheme = createTheme({
     secondary: {
       main: '#4A56E2', //main BLUE
       contrastText: '#4A56E2',
+    },
+    accent: {
+      main: '#FF6596',
     },
     // main: {
     //   blue: '#4A56E2', // main BLUE
