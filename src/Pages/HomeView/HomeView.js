@@ -22,15 +22,13 @@ export default function HomeView() {
   };
 
   return (
-    <>
-      <Container>
-        <InfoBlock />
+    <Container>
+      <InfoBlock />
 
-        {/* <UserData /> */}
+      {/* <UserData /> */}
 
-        <ButtonAddTransaction toggleModal={toggleModal} />
-        <ModalAddTransaction open={open} toggleModal={toggleModal} />
-      </Container>
-    </>
+      <ButtonAddTransaction toggleModal={toggleModal} />
+      <ModalAddTransaction open={open} toggleModal={toggleModal} />
+    </Container>
   );
 }
