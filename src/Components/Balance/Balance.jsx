@@ -7,8 +7,7 @@ import styles from './balance.module.scss';
 const Balance = () => {
     const dispatch = useDispatch();
     const balance = useSelector(state => usersSelectors.getCurrentBalance(state));
-    console.log(balance);
-
+  
     useEffect(() => {
         dispatch(usersOperations.getCurrentBalance());
     }, [dispatch]);
