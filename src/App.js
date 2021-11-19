@@ -40,14 +40,14 @@ const App = () => {
     !isFetchingCurrentUser && (
       <Suspense fallback={'Loading...'}>
         <Routes>
-          {/* <Route
+          <Route
             path="/"
             element={
-              <PublicRoute>
+              <PublicRoute restricted>
                 <LoginView />
               </PublicRoute>
             }
-          /> */}
+          />
 
           <Route
             path="/login"

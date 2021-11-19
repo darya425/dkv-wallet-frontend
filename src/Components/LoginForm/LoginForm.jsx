@@ -57,7 +57,7 @@ const LoginForm = () => {
       </div>
       <form onSubmit={handleSubmit} className={styles.form}>
         <TextField
-          sx={{marginBottom: "40px", minWidth: "100%"}}
+          sx={{ marginBottom: "40px", minWidth: "100%" }}
           variant="standard"
           name="email"
           type="email"
@@ -75,7 +75,7 @@ const LoginForm = () => {
           helperText={touched.email && errors.email}
         />
         <TextField
-          sx={{marginBottom: "40px", minWidth: "100%"}}
+          sx={{ marginBottom: "40px", minWidth: "100%" }}
           variant="standard"
           type={values.showPassword ? 'text' : 'password'}
           name="password"
