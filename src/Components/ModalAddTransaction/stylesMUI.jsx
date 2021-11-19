@@ -1,11 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 import muiTheme from '../UI/muiTheme';
+import { styled } from '@mui/system';
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   modal: {
     display: 'flex',
     marginTop: '60px',
-
+  
     [muiTheme.breakpoints.up('tablet')]: {
       alignItems: 'center',
       justifyContent: 'center',
@@ -13,19 +14,22 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     backgroundColor: "#fff",
-    zIndex: '1',
-    boxShadow: theme.shadows[5],
     padding: "20px",
-    width: "100vw",
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    left: 0,
    
     [muiTheme.breakpoints.up('tablet')]: {
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
       width: '540px',
-      maxHeight: '617px',
+      height: '617px',
       borderRadius: "20px",
       paddingTop: '40px',
       paddingRight: '65px',
       paddingLeft: '65px',
-      paddingBottom: '60px',
     },
   },
   form: {
@@ -35,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
   },
   textField: {
     width: '100%',
-    marginBottom: '40px',
 
     [muiTheme.breakpoints.up('tablet')]: {
       width: '190px',
@@ -43,4 +46,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default useStyles;
+export const Backdrop = styled('div')({
+  zIndex: -1,
+  position: 'fixed',
+  right: 0,
+  bottom: 0,
+  top: 0,
+  left: 0,
+  backgroundColor: "rgba(0, 0, 0, 0)",
+  [muiTheme.breakpoints.up('tablet')]: {
+    backgroundColor: "rgba(0, 0, 0, 0.25)",
+  },
+});

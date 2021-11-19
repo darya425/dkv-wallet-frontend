@@ -1,37 +1,63 @@
-import { useState } from 'react';
-import { Modal, Backdrop, Fade, TextField, MenuItem, Button, FormControlLabel} from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Modal, Fade, TextField, MenuItem, Button, FormControlLabel} from '@mui/material';
+
 import Switcher from './Switcher';
 
 import styles from './ModalAddTransaction.module.scss';
-import useStyles from './stylesMUI';
-
-
-const categories = [
-  'Main',
-  'Food',
-  'Car',
-  'Children',
-  'Development',
-  'House',
-  'Education',
-  'Rest'
-]
+import { useStyles, Backdrop } from './stylesMUI';
+import { transactionOperations } from '../../Redux/transactions';
+import { categoriesOperations, categoriesSelectors } from '../../Redux/categories';
 
 const ModalAddTransaction = ({ open, toggleModal }) => {
   const classes = useStyles();
-  const [category, setCategory] = useState('');
+  const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(true);
+  const [category, setCategory] = useState('');
+  const [amount, setAmount] = useState('');
+  const [date, setDate] = useState('');
+  const [comment, setComment] = useState('');
+  const type = isChecked ? 'expenses' : 'incomes';
+  const {categories} = useSelector(categoriesSelectors.getExpenseCategories);
+  console.log(categories);
 
-  const handleCheck = (event) => {
+  useEffect(() => {
+    dispatch(categoriesOperations.getExpensesCategories());
+  },[dispatch]);
+
+  const handleCheck = () => {
     setIsChecked(prev => !prev);
   }
 
-  const handleChange = (event) => {
-    setCategory(event.target.value);
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case 'category':
+        return setCategory(value);
+      case 'amount':
+        return setAmount(value);
+      case 'date':
+        return setDate(value);
+      case 'comment':
+        return setComment(value);
+      default:
+        return;
+    }
   };
 
+  const reset = () => {
+    setCategory('');
+    setAmount('');
+    setDate('');
+    setComment('');
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(transactionOperations.addTransaction({type, category, amount, date, comment}))
+    reset();
+  }
+
   return (
-    <>
       <Modal
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
@@ -43,10 +69,11 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
       BackdropProps={{
         timeout: 500,
       }}
+      sx={{position: 'absolute'}}
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={handleSubmit}>
               <p className={styles.modalText}>Add transaction</p>
               <div className={styles.switcherContainer}>
                 <span
@@ -59,43 +86,53 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
                   label=""
                   sx={{ margin: '0' }}
                   onChange={handleCheck}
+                  value={type}
+                  name='type'
                 />
-                <span className={isChecked ? `${styles.switcherText} ${styles.red}` : styles.switcherText}>Expences</span>
+                <span
+                  className={isChecked ? `${styles.switcherText} ${styles.red}` : styles.switcherText}
+                >
+                  Expenses
+                </span>
               </div>
               {isChecked && 
                 <TextField
-                  id="standard-select-currency"
                   select
                   placeholder="Choose category"
                   value={category}
+                  name='category'
                   onChange={handleChange}
                   variant="standard"
                   sx={{ marginBottom: '40px' }}
                 >
                   {categories.map((category) => (
-                    <MenuItem key={category} value={category}>
-                      {category}
+                    <MenuItem key={category.categoryName} value={category.categoryName}>
+                      {category.categoryName}
                     </MenuItem>
                   ))}
                 </TextField>
               }
-              <div>
+              <div className={styles.inputContainer}>
                 <TextField
-                  id="standard-basic"
                   variant="standard"
                   placeholder="0.00"
-                  sx={{ marginRight: '30px'}}
+                  name='amount'
+                  value={amount}
+                  onChange={handleChange}
+                  sx={{ marginRight: '30px', marginBottom: '40px'}}
                   className={classes.textField}
                 />
                 <TextField
                   id="date"
                   type="date"
                   variant="standard"
+                  name='date'
+                  value={date}
+                  onChange={handleChange}
                   defaultValue={Date.now()}
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  sx={{ }}
                   className={classes.textField}
                 />
 
@@ -104,6 +141,9 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
                 id="standard-basic"
                 variant="standard"
                 placeholder="Comment"
+                name='comment'
+                value={comment}
+                onChange={handleChange}
                 sx={{marginBottom: '40px'}}
               />
               <Button
@@ -118,6 +158,7 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
                 width: '100%',
                 fontSize: '18px'
               }}
+              onSubmit={handleSubmit}
             >
               ADD
             </Button>
@@ -131,7 +172,7 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
                 paddingBottom: '13px',
                 fontSize: '18px'
               }}
-              onClick={toggleModal}
+              onClick={reset}
             >
               CANCEL
             </Button>
@@ -139,89 +180,6 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
         </div>
       </Fade>
     </Modal>
-      {/* <Modal
-        aria-labelledby="spring-modal-title"
-        aria-describedby="spring-modal-description"
-        open={open}
-        onClose={toggleModal}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open} sx={{borderRadius: "10px"}}>
-          <Box sx={style}>
-            <form>
-              <p>ADD TRANSACTION</p>
-              <FormControlLabel
-                control={<Switcher sx={{ m: 1 }} defaultChecked />}
-                label=""
-              />
-              <TextField
-                id="standard-select-currency"
-                select
-                placeholder="Choose category"
-                value={category}
-                onChange={handleChange}
-                variant="standard"
-              >
-                {categories.map((category) => (
-                  <MenuItem key={category} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
-              </TextField>
-              <TextField
-                id="standard-basic"
-                variant="standard"
-                placeholder="0.00"
-                sx={{marginTop: '10px'}}
-              />
-              <TextField
-                id="date"
-                
-                type="date"
-                variant="standard"
-                defaultValue={Date.now()}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-              <TextField
-                id="standard-basic"
-                variant="standard"
-                placeholder="Comment"
-              />
-              <Button
-              variant="contained"
-              color="primary"
-              sx={{
-                borderRadius: '20px',
-                marginBottom: '10px',
-                boxShadow: 'none',
-                width: '100%'
-              }}
-            >
-              ADD
-            </Button>
-            <Button
-              variant="outlined"
-              color="secondary"
-              sx={{
-                borderRadius: '20px',
-                width: '100%'
-              }}
-              onClick={toggleModal}
-            >
-              CANSEL
-            </Button>
-            </form>
-          </Box>
-        </Fade>
-      </Modal> */}
-    </>
-
   )
 }
 
