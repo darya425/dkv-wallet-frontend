@@ -5,6 +5,7 @@ import Diagram from '../../Components/Diagram';
 import Datepicker from '../../Components/Datepicker';
 import StatisticsTable from '../../Components/StatisticsTable/StatisticsTable';
 // import colors from './colors';
+import VisualContainer from '../../Components/VisualContainer';
 // import StatData from '../../Components/UserData';
 
 import styles from './statView.module.scss';
@@ -12,6 +13,7 @@ import styles from './statView.module.scss';
 export default function StatView() {
   return (
     <Container>
+      <VisualContainer>
       <div className={styles.hiddenNav}>
         <Navigation />
 				<Diagram />
@@ -23,6 +25,7 @@ export default function StatView() {
       </div>      
       
       {/* <StatData /> */}
+      </VisualContainer>
     </Container>
   );
 }

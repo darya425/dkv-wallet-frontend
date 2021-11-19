@@ -47,9 +47,9 @@ const TestRegister = () => {
     dispatch(authOperations.logOut());
   };
 
-  useEffect(() => {
-    dispatch(authOperations.fetchCurrentUser());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(authOperations.fetchCurrentUser());
+  // }, [dispatch]);
 
   const addTransactionsBtn = async e => {
     e.preventDefault();
@@ -67,7 +67,9 @@ const TestRegister = () => {
   };
   const getAllTransactionsBtn = async e => {
     e.preventDefault();
-    const allTransactions = await dispatch(transactionOperations.getAllTransactions());
+    const allTransactions = await dispatch(
+      transactionOperations.getAllTransactions(),
+    );
     console.log(allTransactions);
   };
 
@@ -144,13 +146,28 @@ const TestRegister = () => {
             <h3>registration</h3>
             <form onSubmit={handleSubmitRegister}>
               <label>
-                <input type="email" name="email" value={email} onChange={handleChange}></input>
+                <input
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={handleChange}
+                ></input>
               </label>
               <label>
-                <input type="password" name="password" value={password} onChange={handleChange}></input>
+                <input
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={handleChange}
+                ></input>
               </label>
               <label>
-                <input type="text" name="name" value={name} onChange={handleChange}></input>
+                <input
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={handleChange}
+                ></input>
               </label>
               <button type="submit">submit</button>
             </form>
@@ -159,10 +176,20 @@ const TestRegister = () => {
             <h3>Login</h3>
             <form onSubmit={handleSubmitLogin}>
               <label>
-                <input type="email" name="email" value={email} onChange={handleChange}></input>
+                <input
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={handleChange}
+                ></input>
               </label>
               <label>
-                <input type="password" name="password" value={password} onChange={handleChange}></input>
+                <input
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={handleChange}
+                ></input>
               </label>
               <button type="submit">submit</button>
             </form>
