@@ -25,6 +25,7 @@ export default function StatView() {
       </div>      
       
       {/* <StatData /> */}
+
       </VisualContainer>
     </Container>
   );

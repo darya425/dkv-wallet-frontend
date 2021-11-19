@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   paper: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: "#fff",
     borderRadius: "20px",
     zIndex: '1',
     boxShadow: theme.shadows[5],
@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
   buttonContainer: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
     maxWidth: '300px',
     marginRight: 'auto',
     marginLeft: 'auto'

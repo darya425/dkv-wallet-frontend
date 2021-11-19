@@ -38,7 +38,10 @@ const ModalLogout = ({open, toggleModal}) => {
                 borderRadius: '20px',
                 marginBottom: '10px',
                 boxShadow: 'none',
-                width: '100%'
+                width: '100%',
+                paddingTop: '13px',
+                paddingBottom: '13px',
+                fontSize: '18px'
               }}
               onClick={handleLogout}
             >
@@ -49,7 +52,10 @@ const ModalLogout = ({open, toggleModal}) => {
               color="secondary"
               sx={{
                 borderRadius: '20px',
-                width: '100%'
+                width: '100%',
+                paddingTop: '13px',
+                paddingBottom: '13px',
+                fontSize: '18px'
               }}
               onClick={toggleModal}
             >

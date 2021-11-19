@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
 import { useState } from "react";
 
+import { authSelectors } from '../../Redux/auth';
+
+import Container from "../UI/Container";
 import HeaderIcon from "./HeaderIcon";
 import LogoutIcon from "./LogoutIcon";
+import ModalLogout from "../ModalLogout";
 
 import styles from "./Header.module.scss";
-import ModalLogout from "../ModalLogout";
-import Container from '../UI/Container';
 
 const Header = () => {
   const [open, setShowModal] = useState(false);
+  const name = useSelector(authSelectors.getUserName);
 
   const toggleModal = () => {
     setShowModal(prev => !prev);
@@ -19,7 +23,7 @@ const Header = () => {
     <header className={styles.header}>
       <Container>
         <div className={styles.headContainer}>
-          <Link to="/">
+          <Link to="/home">
           <div className={styles.logo}>
             <HeaderIcon className={styles.headerIcon}/>
             <span className={styles.logoText}>Wallet</span>
@@ -27,7 +31,7 @@ const Header = () => {
         </Link>
         <div className={styles.nameMenu}>
           <div className={styles.name}>  
-            <span>Name</span>
+            <span>{name}</span>
           </div>
           <button className={styles.logoutButton} onClick={toggleModal}>
             <LogoutIcon className={styles.logoutIcon} />
