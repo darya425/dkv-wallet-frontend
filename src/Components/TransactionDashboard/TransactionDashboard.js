@@ -102,12 +102,16 @@ const useStyles = makeStyles(muiTheme => ({
   },
   //string styles
   incomeAmount: {
-    color: muiTheme.palette.primary.main,
-    fontWeight: 'bold',
+    '&.MuiTableCell-root': {
+      color: muiTheme.palette.primary.main,
+      fontWeight: 'bold',
+    },
   },
   expenseAmount: {
-    color: muiTheme.palette.accent.main,
-    fontWeight: 'bold',
+    '&.MuiTableCell-root': {
+      color: muiTheme.palette.accent.main,
+      fontWeight: 'bold',
+    },
   },
 }));
 
