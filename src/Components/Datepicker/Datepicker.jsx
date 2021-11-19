@@ -32,13 +32,14 @@ const Datepicker = () => {
         views={["year", "month"]}
         label="Year and Month"
         minDate={new Date("2015-01-01")}
-        maxDate={new Date("2022-06-01")}
+        maxDate={new Date()}
         value={value}
         onChange={(newValue) => {
           setValue(newValue);
         }}
+        
 		// onMonthChange={handleMonthChange}
-        renderInput={(params) => <TextField {...params} helperText={null} />}
+        renderInput={(params) => <TextField {...params} helperText={null} sx={{marginTop: "30px"}}/>}
       />
     </LocalizationProvider>
   );
