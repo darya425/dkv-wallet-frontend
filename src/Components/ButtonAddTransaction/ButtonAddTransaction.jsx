@@ -6,7 +6,7 @@ const ButtonAddTransaction = ({toggleModal}) => {
   return (
     <Fab color="primary"
       sx={{
-        position: "absolute",
+        position: "fixed",
         right: "20px",
         bottom: "30px",
         width: "44px",

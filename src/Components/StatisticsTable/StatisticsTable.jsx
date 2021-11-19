@@ -45,25 +45,17 @@ const results = [...allExpenses, costs, income];
 
 const useStyles = makeStyles({
   container: {
-    boxShadow: 'none', 
-    backgroundColor: 'transparent', 
     marginTop: '20px',
     maxWidth: '350px'
   },
   head: {
     backgroundColor: 'white',
-    borderBottom: 0,
-    fontWeight: 'bold'
   },
   headLeft: {
     borderRadius: '30px 0 0 30px'
   },
   headRight: {
     borderRadius: "0 30px 30px 0"
-  },
-  firstColumn: {
-    position: 'relative',
-    paddingLeft: '40px'
   },
   tableRow: {
     "&:nth-last-child(n+3) th::before": {
@@ -72,8 +64,6 @@ const useStyles = makeStyles({
       height: "24px",
       display: "block",
       borderRadius: "5px",
-      position: "absolute",
-      left: 0
     },
     "&:nth-last-child(-n+2) th, &:nth-last-child(-n+2) td": {
       borderBottom: 0,
@@ -92,15 +82,17 @@ const useStyles = makeStyles({
 export default function StatisticsTable() {
   const classes = useStyles();
   return (
-    <TableContainer component={Paper} className={classes.container}>
+    <TableContainer component={Paper} className={classes.container} sx={{bgcolor: "transparent",  boxShadow: 'none'}}>
       <Table aria-label="simple table">
         <TableHead >
           <TableRow>
-            <TableCell className={classes.head+' '+ classes.headLeft}>
+            <TableCell className={classes.head+' '+ classes.headLeft}
+            sx={{ borderBottom: 0, fontWeight: 'bold'}}>
               Category
             </TableCell>
             <TableCell
               align="right"
+              sx={{ borderBottom: 0, fontWeight: 'bold'}}
               className={classes.head+' '+ classes.headRight}>
               Amount
             </TableCell>
@@ -114,6 +106,8 @@ export default function StatisticsTable() {
               sx={{
                 "&:nth-last-child(n+3) th::before": {
                   bgcolor: result.color,
+                  position: "absolute",
+                  left: "-1px"
                 },
                
               }}
@@ -122,6 +116,8 @@ export default function StatisticsTable() {
                 component="th"
                 scope="row"
                 className={classes.firstColumn}
+                sx={{ position: "relative",
+                paddingLeft: "40px"}}
               >
                 {result.category}
               </TableCell>
