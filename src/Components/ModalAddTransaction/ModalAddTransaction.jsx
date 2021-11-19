@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Fade, TextField, MenuItem, Button, FormControlLabel} from '@mui/material';
 
 import Switcher from './Switcher';
+import { transactionOperations } from '../../Redux/transactions';
+import { categoriesOperations, categoriesSelectors } from '../../Redux/categories';
 
 import styles from './ModalAddTransaction.module.scss';
 import { useStyles, Backdrop } from './stylesMUI';
-import { transactionOperations } from '../../Redux/transactions';
-import { categoriesOperations, categoriesSelectors } from '../../Redux/categories';
 
 const ModalAddTransaction = ({ open, toggleModal }) => {
   const classes = useStyles();
@@ -19,7 +19,6 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
   const [comment, setComment] = useState('');
   const type = isChecked ? 'expenses' : 'incomes';
   const {categories} = useSelector(categoriesSelectors.getExpenseCategories);
-  console.log(categories);
 
   useEffect(() => {
     dispatch(categoriesOperations.getExpensesCategories());
