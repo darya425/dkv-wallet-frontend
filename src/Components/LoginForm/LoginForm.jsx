@@ -43,9 +43,9 @@ const LoginForm = () => {
         .required('Required field'),
       showPassword: Yup.bool().default('false'),
     }),
-    onSubmit: async ({ email, password}) => {
-      await dispatch(authOperations.logIn({ email, password}));
-      await push('/home');
+    onSubmit: ({ email, password}) => {
+      dispatch(authOperations.logIn({ email, password}));
+      push('/home');
     },
   });
 

@@ -6,6 +6,7 @@ import { authOperations, authSelectors } from './Redux/auth';
 
 import PrivateRoute from './Components/Navigation/PrivateRoute';
 import PublicRoute from './Components/Navigation/PublicRoute';
+import Spinner from './Components/Spinner';
 
 import Header from './Components/Header';
 
@@ -38,7 +39,7 @@ const App = () => {
 
   return (
     !isFetchingCurrentUser && (
-      <Suspense fallback={'Loading...'}>
+      <Suspense fallback={<Spinner />}>
         <Routes>
           <Route
             path="/"
