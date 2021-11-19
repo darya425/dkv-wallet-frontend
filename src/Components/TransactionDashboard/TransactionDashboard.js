@@ -1,11 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   transactionSelectors,
   transactionOperations,
 } from '../../Redux/transactions';
-
-import { usersSelectors } from '../../Redux/users';
 
 import {
   TableBody,
@@ -14,16 +12,34 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
 } from '@mui/material';
 
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(muiTheme => ({
-  table: {
-    borderCollapse: 'inherit',
+  // main table styles
+  mainTableContainer: {
+    display: 'none',
+    [muiTheme.breakpoints.up('tablet')]: {
+      display: 'block',
+
+      '&::-webkit-scrollbar': {
+        width: '10px',
+      },
+      '&::-webkit-scrollbar-track': {
+        background: 'transparent',
+        borderRadius: '7px',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        background: 'rgba(255, 255, 255, 0.5)',
+        borderRadius: '7px',
+      },
+      '&::-webkit-scrollbar-thumb:hover': {
+        background: 'rgba(255, 255, 255, 0.8)',
+      },
+    },
   },
-  tableHeader: {
+  mainTableHeader: {
     backgroundColor: '#fff',
 
     '& th, td': {
@@ -38,11 +54,53 @@ const useStyles = makeStyles(muiTheme => ({
       borderRadius: '0 30px 30px 0',
     },
   },
-  tableBody: {
+  mainTableBody: {
     '& th, td': {
       borderBottom: '1px solid #DCDCDF',
     },
   },
+
+  // second table styles
+  secondTableContainer: {
+    display: 'none',
+    [muiTheme.breakpoints.down('tablet')]: {
+      display: 'block',
+    },
+  },
+
+  secondTables: {
+    position: 'relative',
+    backgroundColor: '#fff',
+    borderCollapse: 'collapse',
+    borderRadius: '10px',
+    marginBottom: '10px',
+
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      display: 'block',
+      left: '0px',
+      height: '100%',
+      width: '5px',
+      borderTopLeftRadius: '10px',
+      borderBottomLeftRadius: '10px',
+    },
+  },
+  sTableFont: {
+    fontWeight: '700',
+  },
+
+  incomeTransaction: {
+    '&::before': {
+      backgroundColor: muiTheme.palette.primary.main,
+    },
+  },
+  expenseTransaction: {
+    '&::before': {
+      backgroundColor: muiTheme.palette.accent.main,
+    },
+  },
+  //string styles
   incomeAmount: {
     color: muiTheme.palette.primary.main,
     fontWeight: 'bold',
@@ -68,46 +126,112 @@ export default function TransactionDashboard() {
 
   return (
     allTransactions && (
-      <TableContainer>
-        <Table className={classes.table} sx={{ minWidth: '100%' }}>
-          <TableHead className={classes.tableHeader}>
-            <TableRow>
-              <TableCell align="center" width="15%">
-                Date
-              </TableCell>
-              <TableCell align="center" width="5%">
-                Type
-              </TableCell>
-              <TableCell align="center" width="15%">
-                Category
-              </TableCell>
-              <TableCell align="center" width="35%">
-                Comment
-              </TableCell>
-              <TableCell align="center" width="15%">
-                Amount
-              </TableCell>
-              <TableCell align="center" width="15%">
-                Balance
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody className={classes.tableBody}>
-            {allTransactions.map(transaction => (
-              <TableRow
-                key={transaction._id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="td" scope="row" align="center">
+      <>
+        {/*mainTable*/}
+        <TableContainer
+          sx={{ maxHeight: 440 }}
+          className={classes.mainTableContainer}
+        >
+          <Table className={classes.table} stickyHeader>
+            <TableHead className={classes.mainTableHeader}>
+              <TableRow>
+                <TableCell align="center" width="15%">
+                  Date
+                </TableCell>
+                <TableCell align="center" width="5%">
+                  Type
+                </TableCell>
+                <TableCell align="center" width="15%">
+                  Category
+                </TableCell>
+                <TableCell align="center" width="35%">
+                  Comment
+                </TableCell>
+                <TableCell align="center" width="15%">
+                  Amount
+                </TableCell>
+                <TableCell align="center" width="15%">
+                  Balance
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody className={classes.mainTableBody}>
+              {allTransactions.map(transaction => (
+                <TableRow
+                  key={transaction._id}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="td" scope="row" align="center">
+                    {new Date(transaction.date).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell align="center">
+                    {transaction.type === 'income' ? '+' : '-'}
+                  </TableCell>
+                  <TableCell align="center">{transaction.category}</TableCell>
+                  <TableCell align="center">{transaction.comment}</TableCell>
+                  <TableCell
+                    align="center"
+                    className={
+                      transaction.type === 'income'
+                        ? classes.incomeAmount
+                        : classes.expenseAmount
+                    }
+                  >
+                    {transaction.amount}
+                  </TableCell>
+                  <TableCell align="center">
+                    {transaction.balanceState}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        {/*secondTable*/}
+        <TableContainer className={classes.secondTableContainer}>
+          {allTransactions.map(transaction => (
+            <Table
+              className={
+                transaction.type === 'income'
+                  ? classes.secondTables + ' ' + classes.incomeTransaction
+                  : classes.secondTables + ' ' + classes.expenseTransaction
+              }
+            >
+              <TableRow>
+                <TableCell variant="head" className={classes.sTableFont}>
+                  Date
+                </TableCell>
+                <TableCell align="right">
                   {new Date(transaction.date).toLocaleDateString()}
                 </TableCell>
-                <TableCell align="center">
+              </TableRow>
+              <TableRow>
+                <TableCell variant="head" className={classes.sTableFont}>
+                  Type
+                </TableCell>
+                <TableCell align="right">
                   {transaction.type === 'income' ? '+' : '-'}
                 </TableCell>
-                <TableCell align="center">{transaction.category}</TableCell>
-                <TableCell align="center">{transaction.comment}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell variant="head" className={classes.sTableFont}>
+                  Category
+                </TableCell>
+                <TableCell align="right">{transaction.category}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell variant="head" className={classes.sTableFont}>
+                  Comment
+                </TableCell>
+                <TableCell align="right">{transaction.comment}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell variant="head" className={classes.sTableFont}>
+                  Amount
+                </TableCell>
                 <TableCell
-                  align="center"
+                  align="right"
                   className={
                     transaction.type === 'income'
                       ? classes.incomeAmount
@@ -116,12 +240,17 @@ export default function TransactionDashboard() {
                 >
                   {transaction.amount}
                 </TableCell>
-                <TableCell align="center">{transaction.balanceState}</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+              <TableRow>
+                <TableCell variant="head" className={classes.sTableFont}>
+                  Balance
+                </TableCell>
+                <TableCell align="right">{transaction.balanceState}</TableCell>
+              </TableRow>
+            </Table>
+          ))}
+        </TableContainer>
+      </>
     )
   );
 }
