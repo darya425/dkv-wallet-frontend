@@ -42,9 +42,41 @@ const getStatistics = createAsyncThunk(
   },
 );
 
+const getExpenseTransactions = createAsyncThunk(
+  'transactions/expense',
+  async credentials => {
+    try {
+      const { data } = await axios.post(
+        '/api/transactions/statistics',
+        credentials,
+      );
+      return data;
+    } catch (error) {
+      //ToDo add error handling
+    }
+  },
+);
+
+const getIncomeTransactions = createAsyncThunk(
+  'transactions/expense',
+  async credentials => {
+    try {
+      const { data } = await axios.post(
+        '/api/transactions/statistics',
+        credentials,
+      );
+      return data;
+    } catch (error) {
+      //ToDo add error handling
+    }
+  },
+);
+
 const operations = {
   addTransaction,
   getAllTransactions,
   getStatistics,
+  getExpenseTransactions,
+  getIncomeTransactions,
 };
 export default operations;
