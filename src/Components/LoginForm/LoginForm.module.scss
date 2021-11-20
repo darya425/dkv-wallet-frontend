@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .logo {
@@ -39,7 +39,7 @@
 }
 
 .text {
-  @include font-data($font-poppins, 25px, $text-black, 700, 1.3);
+  @include font-data($font-poppins, 30px, $text-black, 700, 1.5);
 }
 
 .linkBtn {
@@ -51,7 +51,7 @@
   text-transform: uppercase;
   text-align: center;
   outline: none;
-  @include font-data($font-poppins, 14px, $main-blue, 700, 1.5);
+  @include font-data($font-poppins, 18px, $main-blue, 400, 1.5);
 
   @media screen and (min-width: $tablet) {
     width: 280px;
