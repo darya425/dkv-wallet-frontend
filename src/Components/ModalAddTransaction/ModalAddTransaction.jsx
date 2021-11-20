@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal, Fade, TextField, MenuItem, Button, FormControlLabel} from '@mui/material';
+import { Modal, Fade, TextField, MenuItem, Button, FormControlLabel } from '@mui/material';
 
 import Switcher from './Switcher';
 import { transactionOperations } from '../../Redux/transactions';
@@ -9,15 +9,17 @@ import { categoriesOperations, categoriesSelectors } from '../../Redux/categorie
 import styles from './ModalAddTransaction.module.scss';
 import { useStyles, Backdrop } from './stylesMUI';
 
+
 const ModalAddTransaction = ({ open, toggleModal }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+
   const [isChecked, setIsChecked] = useState(true);
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState('');
   const [comment, setComment] = useState('');
-  const type = isChecked ? 'expenses' : 'incomes';
+
   const {categories} = useSelector(categoriesSelectors.getExpenseCategories);
 
   useEffect(() => {
@@ -52,8 +54,10 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const type = isChecked ? 'expense' : 'income';
     dispatch(transactionOperations.addTransaction({type, category, amount, date, comment}))
     reset();
+    toggleModal();
   }
 
   return (
@@ -85,8 +89,6 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
                   label=""
                   sx={{ margin: '0' }}
                   onChange={handleCheck}
-                  value={type}
-                  name='type'
                 />
                 <span
                   className={isChecked ? `${styles.switcherText} ${styles.red}` : styles.switcherText}
@@ -97,7 +99,7 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
               {isChecked && 
                 <TextField
                   select
-                  placeholder="Choose category"
+                  label="Choose category"
                   value={category}
                   name='category'
                   onChange={handleChange}
@@ -126,15 +128,14 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
                   type="date"
                   variant="standard"
                   name='date'
-                  value={date}
                   onChange={handleChange}
                   defaultValue={Date.now()}
                   InputLabelProps={{
                     shrink: true,
-                  }}
+                }}
+                sx={{color: '#BDBDBD'}}
                   className={classes.textField}
                 />
-
               </div>
               <TextField
                 id="standard-basic"
@@ -148,6 +149,7 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
               <Button
               variant="contained"
               color="primary"
+              type='submit'
               sx={{
                 borderRadius: '20px',
                 marginBottom: '20px',
@@ -157,7 +159,6 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
                 width: '100%',
                 fontSize: '18px'
               }}
-              onSubmit={handleSubmit}
             >
               ADD
             </Button>
@@ -171,7 +172,7 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
                 paddingBottom: '13px',
                 fontSize: '18px'
               }}
-              onClick={reset}
+              onClick={toggleModal}
             >
               CANCEL
             </Button>
