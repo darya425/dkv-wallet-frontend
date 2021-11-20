@@ -71,7 +71,8 @@ export default function BasicTable() {
     <TableContainer
       component={Paper}
       sx={{
-        boxShadow: 0
+        boxShadow: 0,
+        bgcolor: "transparent"
       }}
     >
       <Table className={classes.table}
@@ -90,13 +91,13 @@ export default function BasicTable() {
                
               }}
             >
-             <Typography style={{ fontWeight: 'bold' }}>Валюта</Typography>
+             <Typography style={{ fontWeight: 'bold' }}>Currency</Typography>
             </TableCell>
             <TableCell className={classes.tableHead} align="center"  sx={{ color: "white", border: 0}}>
-            <Typography style={{ fontWeight: 'bold' }}>Покупка</Typography>
+            <Typography style={{ fontWeight: 'bold' }}>Buy price</Typography>
             </TableCell>
             <TableCell align="right"  sx={{ color: "white", border: 0}}>
-            <Typography style={{ fontWeight: 'bold' }}>Продажа</Typography>
+            <Typography style={{ fontWeight: 'bold' }}>Sell price</Typography>
             </TableCell>
           </TableRow>
         </TableHead>
