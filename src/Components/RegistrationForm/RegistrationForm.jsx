@@ -3,7 +3,9 @@ import { useDispatch } from 'react-redux';
 import { authOperations } from '../../Redux/auth';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { TextField, Button, IconButton } from '@material-ui/core';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountBox from '@mui/icons-material/AccountBox';
@@ -43,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const RegistrationForm = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const dispatch = useDispatch();
   let push = useNavigate();
 
@@ -111,7 +113,8 @@ const RegistrationForm = () => {
       </div>
       <form onSubmit={handleSubmit} className={styles.form}>
         <TextField
-          className={classes.width}
+          sx={{marginBottom: "40px", minWidth: "100%"}}
+          variant="standard"
           name="email"
           type="email"
           values={values.email}
@@ -128,7 +131,8 @@ const RegistrationForm = () => {
           helperText={touched.email && errors.email}
         />
         <TextField
-          className={classes.width}
+          sx={{marginBottom: "40px", minWidth: "100%"}}
+          variant="standard"
           type={values.showPassword ? 'text' : 'password'}
           name="password"
           values={values.password}
@@ -165,7 +169,8 @@ const RegistrationForm = () => {
         />
         <div className={styles.wrapProgress}>
           <TextField
-            className={classes.width}
+            sx={{marginBottom: "40px", minWidth: "100%"}}
+            variant="standard"
             type={values.showConfirmPassword ? 'text' : 'password'}
             name="confirm"
             values={values.confirm}
@@ -214,7 +219,8 @@ const RegistrationForm = () => {
           </div>
         </div>
         <TextField
-          className={classes.width}
+          sx={{marginBottom: "40px", minWidth: "100%"}}
+          variant="standard"
           type="text"
           name="name"
           values={values.name}
