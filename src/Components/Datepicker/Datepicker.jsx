@@ -3,13 +3,20 @@ import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
-// import getDaysInMonth from 'date-fns/getDaysInMonth';
 
-const Datepicker = () => {
+const Datepicker = ({getMonthTransactions}) => {
   const [value, setValue] = useState(new Date());
+  // const [loading, setLoading] = useState('false');
+  const getDate = new Date(value);
+  const month = getDate.getMonth() + 1;
+  const year = getDate.getFullYear();
+  function daysInMonth (month, year) {
+    return new Date(year, month, 0).getDate();
+  }
+// console.log(daysInMonth(month, year));
 
 //   useEffect(() => {
-//     getCurrentMonthTransactions(initialValue);
+//     getMonthTransactions(value);
 //     // abort request on unmount
 //     return () => ;
 //   }, []);
@@ -23,7 +30,7 @@ const Datepicker = () => {
 
 //     setIsLoading(true);
 //     setTransactions([]);
-//     getCurrentMonthTransactions(date);
+//     getMonthTransactions(date);
 //   };
 
   return (
@@ -37,9 +44,7 @@ const Datepicker = () => {
         onChange={(newValue) => {
           setValue(newValue);
         }}
-        
-		// onMonthChange={handleMonthChange}
-        renderInput={(params) => <TextField {...params} helperText={null} sx={{marginTop: "30px"}}/>}
+        renderInput={(params) => <TextField {...params} helperText={null}/>}
       />
     </LocalizationProvider>
   );
