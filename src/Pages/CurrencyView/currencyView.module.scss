@@ -1,0 +1,11 @@
+@import '../../Styles/main.scss';
+
+.curContainer {
+  margin-top: 30px;
+}
+
+.hidden {
+  @media screen and (min-width: $tablet) {
+    @include visually-hidden;
+  }
+}

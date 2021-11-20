@@ -17,23 +17,14 @@
   }
 }
 
-.balvanka {
-  margin-left: 20px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 334px;
-  height: 174px;
-  color: lightgreen;
-  background-color: #4a56e2;
-  border-radius: 30px;
+.curContainer {
+  @media screen and (min-width: $tablet) {
+    min-width: 334px;
+  }
 
   @media screen and (min-width: $desktop) {
-    margin-left: 0px;
     margin-top: 30px;
-    width: 350px;
+    min-width: 348px;
   }
 }
 
