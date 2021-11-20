@@ -1,6 +1,6 @@
 import Navigation from '../Navigation';
 import Balance from '../Balance';
-// import Currency from '../Currency';
+import Currency from '../Currency';
 
 import styles from './InfoBlock.module.scss';
 
@@ -11,10 +11,10 @@ export default function Info() {
                 <Navigation /> 
                 <Balance />
             </div>
-            <div className={styles.balvanka + ' ' + styles.hidden}>
+            {/* <div className={styles.balvanka + ' ' + styles.hidden}>
             $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $
-            </div>
-            {/* <Currency /> */}
+            </div> */}
+            <Currency/>
         </div>
     );
 }
