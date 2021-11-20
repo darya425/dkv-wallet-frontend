@@ -5,47 +5,15 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { makeStyles } from '@material-ui/core/styles';
 import AccountBox from '@mui/icons-material/AccountBox';
 import MailIcon from '@mui/icons-material/Mail';
 import LockIcon from '@mui/icons-material/Lock';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import styles from './RegistrationForm.module.scss';
 import logo from './icons/logo.png';
 
-const useStyles = makeStyles(theme => ({
-  registerBtn: {
-    height: 50,
-    backgroundColor: '#24CCA7',
-    color: '#fff',
-    [theme.breakpoints.up('sm')]: {
-      maxWidth: 300,
-      width: '100%',
-      height: 50,
-      borderRadius: 20,
-      backgroundColor: '#24CCA7',
-      color: '#fff',
-      marginBottom: 20,
-    },
-  },
-  width: {
-    maxWidth: 280,
-    width: '100%',
-    marginBottom: 40,
-    [theme.breakpoints.up('sm')]: {
-      maxWidth: 410,
-      width: '100%',
-      marginBottom: 40,
-    },
-  },
-}));
-
 const RegistrationForm = () => {
-  // const classes = useStyles();
   const dispatch = useDispatch();
   let push = useNavigate();
 
@@ -55,8 +23,6 @@ const RegistrationForm = () => {
     values,
     touched,
     errors,
-    handleBlur,
-    setValues,
   } = useFormik({
     initialValues: {
       email: '',
@@ -105,20 +71,23 @@ const RegistrationForm = () => {
   };
 
   const valuesRange = setRangeValue(errors, touched);
+  
   return (
-    <div className={styles.innerContainer}>
+    <div className={styles.сontainer}>
       <div className={styles.logoBox}>
         <img className={styles.logo} src={logo} alt="wallet" />
         <h1 className={styles.text}>Wallet</h1>
       </div>
       <form onSubmit={handleSubmit} className={styles.form}>
         <TextField
-          sx={{marginBottom: "40px", minWidth: "100%"}}
+          sx={{
+            '&.MuiTextField-root': { m: 2 },
+          }}
+          fullWidth
           variant="standard"
           name="email"
           type="email"
           values={values.email}
-          onBlur={handleBlur}
           onChange={handleChange}
           placeholder="Enter your email"
           InputProps={{
@@ -131,12 +100,14 @@ const RegistrationForm = () => {
           helperText={touched.email && errors.email}
         />
         <TextField
-          sx={{marginBottom: "40px", minWidth: "100%"}}
+          sx={{
+            '&.MuiTextField-root': { m: 2 },
+          }}
+          fullWidth
           variant="standard"
-          type={values.showPassword ? 'text' : 'password'}
+          type="password"
           name="password"
           values={values.password}
-          onBlur={handleBlur}
           onChange={handleChange}
           placeholder="Enter your password"
           InputProps={{
@@ -145,88 +116,49 @@ const RegistrationForm = () => {
                 <LockIcon htmlColor="#E0E0E0" />
               </InputAdornment>
             ),
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  style={{ color: '#E0E0E0' }}
-                  type="bool"
-                  name="showPassword"
-                  aria-label="toggle password visibility"
-                  onClick={() =>
-                    setValues(prev => ({
-                      ...prev,
-                      showPassword: !prev.showPassword,
-                    }))
-                  }
-                  onMouseDown={e => e.preventDefault()}
-                >
-                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            ),
           }}
           helperText={touched.password && errors.password}
         />
-        <div className={styles.wrapProgress}>
-          <TextField
-            sx={{marginBottom: "40px", minWidth: "100%"}}
-            variant="standard"
-            type={values.showConfirmPassword ? 'text' : 'password'}
-            name="confirm"
-            values={values.confirm}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            placeholder="Enter your password"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <LockIcon htmlColor="#E0E0E0" />
-                </InputAdornment>
-              ),
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    style={{ color: '#E0E0E0' }}
-                    type="bool"
-                    name="showConfirmPassword"
-                    aria-label="toggle password visibility"
-                    onClick={() =>
-                      setValues(prev => ({
-                        ...prev,
-                        showConfirmPassword: !prev.showConfirmPassword,
-                      }))
-                    }
-                    onMouseDown={e => e.preventDefault()}
-                  >
-                    {values.showConfirmPassword ? (
-                      <Visibility />
-                    ) : (
-                      <VisibilityOff />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            helperText={touched.confirm && errors.confirm}
-          />
-          <div className={styles.progressbar}>
-            <progress
-              min="0"
-              max="4"
-              value={valuesRange}
-              id="progress"
-            ></progress>
-          </div>
+        <TextField
+          sx={{
+            '&.MuiTextField-root': { m: 2 },
+          }}
+          fullWidth
+          variant="standard"
+          type="password"
+          name="confirm"
+          values={values.confirm}
+          onChange={handleChange}
+          placeholder="Confirm your password"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <LockIcon htmlColor="#E0E0E0" />
+              </InputAdornment>
+            ),
+          }}
+          helperText={touched.confirm && errors.confirm}
+        />
+        <div className={styles.progressbar}>
+          <progress
+            min="0"
+            max="4"
+            value={valuesRange}
+            id="progress"
+          ></progress>
         </div>
         <TextField
-          sx={{marginBottom: "40px", minWidth: "100%"}}
+          sx={{
+            '&.MuiTextField-root': { m: 2 },
+          }}
+          fullWidth
           variant="standard"
           type="text"
           name="name"
           values={values.name}
-          onBlur={handleBlur}
           onChange={handleChange}
           placeholder="Enter you name"
+          helperText={touched.name && errors.name}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -234,7 +166,6 @@ const RegistrationForm = () => {
               </InputAdornment>
             ),
           }}
-          helperText={touched.firstName && errors.firstName}
         />
         <div className={styles.btnWrapper}>
           <Button
@@ -242,16 +173,19 @@ const RegistrationForm = () => {
             color="primary"
             type="submit"
             style={{
+              marginTop: 20,
               marginBottom: 20,
               width: '100%',
               maxWidth: 280,
               borderRadius: 20,
               padding: '13px 68px',
+              fontSize: 18,
+              lineHeight: 1.3,
             }}
           >
             Sign up
           </Button>
-          <Link to={'/'} className={styles.linkBtn}>
+          <Link to={'/login'} className={styles.linkBtn}>
             Sign in
           </Link>
         </div>

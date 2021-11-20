@@ -22,7 +22,6 @@ const LoginForm = () => {
     values,
     touched,
     errors,
-    handleBlur,
   } = useFormik({
     initialValues: {
       email: '',
@@ -59,7 +58,6 @@ const LoginForm = () => {
           name="email"
           type="email"
           values={values.email}
-          // onBlur={handleBlur}
           onChange={handleChange}
           placeholder="Enter your email"
           InputProps={{
@@ -80,7 +78,6 @@ const LoginForm = () => {
           type="password"
           name="password"
           values={values.password}
-          // onBlur={handleBlur}
           onChange={handleChange}
           placeholder="Enter your password"
           helperText={touched.password && errors.password}
