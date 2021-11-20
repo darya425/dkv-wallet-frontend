@@ -33,3 +33,22 @@
     }
   }
 }
+
+.visualLine {
+  &::after {
+    display: none;
+    content: '';
+    position: absolute;
+    top: 85px;
+    left: 465px;
+    height: calc(100vh - 85px);
+    z-index: 1;
+    border-right: 1px solid #e7e5f2;
+    box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.05),
+      1px 0px 0px rgba(255, 255, 255, 0.6);
+
+    @media screen and (min-width: $desktop) {
+      display: block;
+    }
+  }
+}

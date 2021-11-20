@@ -11,10 +11,10 @@ export default function Info() {
                 <Navigation /> 
                 <Balance />
             </div>
-            {/* <div className={styles.balvanka + ' ' + styles.hidden}>
-            $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $
-            </div> */}
-            <Currency/>
+            <div className={styles.curContainer + ' ' + styles.hidden}>
+                <Currency/>
+            </div>
+            
         </div>
     );
 }
