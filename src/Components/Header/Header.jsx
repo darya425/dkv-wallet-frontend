@@ -6,7 +6,7 @@ import { authSelectors } from '../../Redux/auth';
 
 import Container from "../UI/Container";
 import HeaderIcon from "./HeaderIcon";
-import LogoutIcon from "./LogoutIcon";
+import {LogoutIcon} from "./LogoutIcon";
 import ModalLogout from "../ModalLogout";
 
 import styles from "./Header.module.scss";
@@ -34,7 +34,7 @@ const Header = () => {
             <span>{name}</span>
           </div>
           <button className={styles.logoutButton} onClick={toggleModal}>
-            <LogoutIcon className={styles.logoutIcon} />
+            <span className={styles.svgImg}><LogoutIcon  className={styles.logoutIcon} /></span>
             <span className={styles.buttonText}>Exit</span>
           </button>
         </div>
