@@ -10,7 +10,8 @@ const Balance = () => {
   
     useEffect(() => {
         dispatch(usersOperations.getCurrentBalance());
-    }, [dispatch]);
+    }, [dispatch, balance]);
+
 
     return (
         <div className={styles.balanceContainer}>
