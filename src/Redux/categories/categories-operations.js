@@ -16,7 +16,7 @@ const getExpensesCategories = createAsyncThunk(
         setSnackbar(
           true,
           'error',
-          'Somethink went wrong, please try again later',
+          'Something went wrong, please try again later',
         ),
       );
       return thunkApi.rejectWithValue(state);
