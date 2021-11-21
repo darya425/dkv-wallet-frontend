@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { setSnackbar } from '../snackbar/snackbar';
 
 axios.defaults.baseURL = 'http://wallet-backend-g5.herokuapp.com';
 
@@ -13,24 +14,39 @@ const token = {
 };
 
 // registration
-const register = createAsyncThunk('auth/register', async credentials => {
-  try {
-    const { data } = await axios.post('/api/auth/register', credentials);
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    //ToDo add error handling
-  }
-});
+const register = createAsyncThunk(
+  'auth/register',
+  async (credentials, thunkApi) => {
+    try {
+      const { data } = await axios.post('/api/auth/register', credentials);
+      token.set(data.token);
+      thunkApi.dispatch(
+        setSnackbar(true, 'success', 'Now your register, please signin'),
+      );
+      return data;
+    } catch (error) {
+      const state = thunkApi.getState();
+      thunkApi.dispatch(
+        setSnackbar(true, 'error', 'This email already in use'),
+      );
+      return thunkApi.rejectWithValue(state);
+    }
+  },
+);
 
 // login
-const logIn = createAsyncThunk('auth/login', async credentials => {
+const logIn = createAsyncThunk('auth/login', async (credentials, thunkApi) => {
   try {
     const { data } = await axios.post('/api/auth/login', credentials);
     token.set(data.token);
+    thunkApi.dispatch(
+      setSnackbar(true, 'success', 'Welcome on your dashboard'),
+    );
     return data;
   } catch (error) {
-    //ToDo add error handling
+    const state = thunkApi.getState();
+    thunkApi.dispatch(setSnackbar(true, 'error', 'Wrong login or password'));
+    return thunkApi.rejectWithValue(state);
   }
 });
 
@@ -50,18 +66,34 @@ const fetchCurrentUser = createAsyncThunk(
       const { data } = await axios.get('/api/users/current');
       return data;
     } catch (error) {
-      //ToDo add error handling
+      const state = thunkApi.getState();
+      thunkApi.dispatch(
+        setSnackbar(
+          true,
+          'error',
+          'Somethink went wrong, please try again later',
+        ),
+      );
+      return thunkApi.rejectWithValue(state);
     }
   },
 );
 
 // logout
-const logOut = createAsyncThunk('auth/logout', async () => {
+const logOut = createAsyncThunk('auth/logout', async (_, thunkApi) => {
   try {
     await axios.get('/api/auth/logout');
     token.unset();
   } catch (error) {
-    //ToDo add error handling
+    const state = thunkApi.getState();
+    thunkApi.dispatch(
+      setSnackbar(
+        true,
+        'error',
+        'Somethink went wrong, please try again later',
+      ),
+    );
+    return thunkApi.rejectWithValue(state);
   }
 });
 
