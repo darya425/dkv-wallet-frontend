@@ -9,6 +9,7 @@ import PublicRoute from './Components/Navigation/PublicRoute';
 import Spinner from './Components/Spinner';
 
 import Header from './Components/Header';
+import Snackbar from './Components/Snackbar/Snackbar';
 
 const LoginView = lazy(() =>
   import('./Pages/LoginView' /* webpackChunkName: "LoginView"*/),
@@ -39,69 +40,72 @@ const App = () => {
 
   return (
     !isFetchingCurrentUser && (
-      <Suspense fallback={<Spinner />}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <PublicRoute restricted>
-                <LoginView />
-              </PublicRoute>
-            }
-          />
+      <>
+        <Snackbar />
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PublicRoute restricted>
+                  <LoginView />
+                </PublicRoute>
+              }
+            />
 
-          <Route
-            path="/login"
-            redirectTo="/home"
-            restricted
-            element={
-              <PublicRoute restricted>
-                <LoginView />
-              </PublicRoute>
-            }
-          />
+            <Route
+              path="/login"
+              redirectTo="/home"
+              restricted
+              element={
+                <PublicRoute restricted>
+                  <LoginView />
+                </PublicRoute>
+              }
+            />
 
-          <Route
-            path="/register"
-            restricted
-            element={
-              <PublicRoute restricted>
-                <RegisterView />
-              </PublicRoute>
-            }
-          />
+            <Route
+              path="/register"
+              restricted
+              element={
+                <PublicRoute restricted>
+                  <RegisterView />
+                </PublicRoute>
+              }
+            />
 
-          <Route
-            path="/home"
-            element={
-              <PrivateRoute>
-                <Header />
-                <HomeView />
-              </PrivateRoute>
-            }
-          />
+            <Route
+              path="/home"
+              element={
+                <PrivateRoute>
+                  <Header />
+                  <HomeView />
+                </PrivateRoute>
+              }
+            />
 
-          <Route
-            path="/statistics"
-            element={
-              <PrivateRoute>
-                <Header />
-                <StatView />
-              </PrivateRoute>
-            }
-          />
+            <Route
+              path="/statistics"
+              element={
+                <PrivateRoute>
+                  <Header />
+                  <StatView />
+                </PrivateRoute>
+              }
+            />
 
-          <Route
-            path="/currency"
-            element={
-              <PrivateRoute>
-                <Header />
-                <CurrencyView />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      </Suspense>
+            <Route
+              path="/currency"
+              element={
+                <PrivateRoute>
+                  <Header />
+                  <CurrencyView />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </Suspense>
+      </>
     )
   );
 };

@@ -22,6 +22,7 @@ const useStyles = makeStyles(muiTheme => ({
     display: 'none',
     [muiTheme.breakpoints.up('tablet')]: {
       display: 'block',
+      maxHeight: '60vh',
 
       '&::-webkit-scrollbar': {
         width: '10px',
@@ -38,10 +39,11 @@ const useStyles = makeStyles(muiTheme => ({
         background: 'rgba(255, 255, 255, 0.8)',
       },
     },
+    [muiTheme.breakpoints.up('desktop')]: {
+      maxHeight: '85vh',
+    },
   },
   mainTableHeader: {
-    backgroundColor: '#fff',
-
     '& th, td': {
       fontWeight: 'bold',
     },
@@ -133,7 +135,7 @@ export default function TransactionDashboard() {
       <>
         {/*mainTable*/}
         <TableContainer
-          sx={{ maxHeight: 440 }}
+          // sx={{ maxHeight: '50vh' }}
           className={classes.mainTableContainer}
         >
           <Table className={classes.table} stickyHeader>
@@ -196,6 +198,7 @@ export default function TransactionDashboard() {
         <TableContainer className={classes.secondTableContainer}>
           {allTransactions.map(transaction => (
             <Table
+              key={transaction._id}
               className={
                 transaction.type === 'income'
                   ? classes.secondTables + ' ' + classes.incomeTransaction
