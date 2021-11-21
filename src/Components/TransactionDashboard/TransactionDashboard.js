@@ -205,55 +205,59 @@ export default function TransactionDashboard() {
                   : classes.secondTables + ' ' + classes.expenseTransaction
               }
             >
-              <TableRow>
-                <TableCell variant="head" className={classes.sTableFont}>
-                  Date
-                </TableCell>
-                <TableCell align="right">
-                  {new Date(transaction.date).toLocaleDateString()}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell variant="head" className={classes.sTableFont}>
-                  Type
-                </TableCell>
-                <TableCell align="right">
-                  {transaction.type === 'income' ? '+' : '-'}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell variant="head" className={classes.sTableFont}>
-                  Category
-                </TableCell>
-                <TableCell align="right">{transaction.category}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell variant="head" className={classes.sTableFont}>
-                  Comment
-                </TableCell>
-                <TableCell align="right">{transaction.comment}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell variant="head" className={classes.sTableFont}>
-                  Amount
-                </TableCell>
-                <TableCell
-                  align="right"
-                  className={
-                    transaction.type === 'income'
-                      ? classes.incomeAmount
-                      : classes.expenseAmount
-                  }
-                >
-                  {transaction.amount}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell variant="head" className={classes.sTableFont}>
-                  Balance
-                </TableCell>
-                <TableCell align="right">{transaction.balanceState}</TableCell>
-              </TableRow>
+              <TableBody>
+                <TableRow>
+                  <TableCell variant="head" className={classes.sTableFont}>
+                    Date
+                  </TableCell>
+                  <TableCell align="right">
+                    {new Date(transaction.date).toLocaleDateString()}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell variant="head" className={classes.sTableFont}>
+                    Type
+                  </TableCell>
+                  <TableCell align="right">
+                    {transaction.type === 'income' ? '+' : '-'}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell variant="head" className={classes.sTableFont}>
+                    Category
+                  </TableCell>
+                  <TableCell align="right">{transaction.category}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell variant="head" className={classes.sTableFont}>
+                    Comment
+                  </TableCell>
+                  <TableCell align="right">{transaction.comment}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell variant="head" className={classes.sTableFont}>
+                    Amount
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    className={
+                      transaction.type === 'income'
+                        ? classes.incomeAmount
+                        : classes.expenseAmount
+                    }
+                  >
+                    {transaction.amount}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell variant="head" className={classes.sTableFont}>
+                    Balance
+                  </TableCell>
+                  <TableCell align="right">
+                    {transaction.balanceState}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
             </Table>
           ))}
         </TableContainer>
