@@ -198,6 +198,7 @@ export default function TransactionDashboard() {
         <TableContainer className={classes.secondTableContainer}>
           {allTransactions.map(transaction => (
             <Table
+              key={transaction._id}
               className={
                 transaction.type === 'income'
                   ? classes.secondTables + ' ' + classes.incomeTransaction
