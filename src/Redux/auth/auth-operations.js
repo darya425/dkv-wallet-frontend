@@ -21,7 +21,7 @@ const register = createAsyncThunk(
       const { data } = await axios.post('/api/auth/register', credentials);
       token.set(data.token);
       thunkApi.dispatch(
-        setSnackbar(true, 'success', 'Now your register, please signin'),
+        setSnackbar(true, 'success', 'You are registered, please sign in'),
       );
       return data;
     } catch (error) {
@@ -71,7 +71,7 @@ const fetchCurrentUser = createAsyncThunk(
         setSnackbar(
           true,
           'error',
-          'Somethink went wrong, please try again later',
+          'Something went wrong, please try again later',
         ),
       );
       return thunkApi.rejectWithValue(state);
@@ -90,7 +90,7 @@ const logOut = createAsyncThunk('auth/logout', async (_, thunkApi) => {
       setSnackbar(
         true,
         'error',
-        'Somethink went wrong, please try again later',
+        'Something went wrong, please try again later',
       ),
     );
     return thunkApi.rejectWithValue(state);
