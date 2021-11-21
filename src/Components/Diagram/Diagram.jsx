@@ -4,7 +4,6 @@ import styles from "./Diagram.module.scss";
 
 const Diagram = ({ colors, labels, expenses, expensesTotal }) => {
   const chartContainer = useRef();
-
   const data = {
     labels,
     datasets: [
@@ -40,7 +39,7 @@ const Diagram = ({ colors, labels, expenses, expensesTotal }) => {
     return () => {
       newChartInstance.destroy();
     };
-  }, []);
+  }, [labels, expenses]);
 
   return (
     <div className={styles.chartContainer}>

@@ -1,6 +1,6 @@
-// import { useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { transactionOperations, transactionSelectors } from '../../Redux/transactions';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { transactionOperations, transactionSelectors } from '../../Redux/transactions';
 
 import InfoBlock from '../../Components/InfoBlock';
 import Navigation from '../../Components/Navigation';
@@ -14,57 +14,64 @@ import styles from './statView.module.scss';
 import {colors} from './colors';
 
 export default function StatView() {
+	const [startDay, setStartDay] = useState('');
+	const [endDay, setEndDay] = useState('');
 
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-	// const monthTransactions = useSelector(transactions.getStatistics);
-	// const income = useSelector(transactions.getIncome);
-	// const expenses = useSelector(transactions.getExpense);
-	// const expensesTotal = expenses.reduce((a, b) => a + b, 0); 
+	function daysInMonth (month, year) {
+    return new Date(year, month, 0).getDate();
+  }
+
+	useEffect(() => {
+		const date = new Date();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+  const firstDayOfMonth = `'${year}-${month}-01'`;
+  const lastDayOfMonth = `'${year}-${month}-${daysInMonth(month, year)}`;
+	setStartDay(firstDayOfMonth);
+    setEndDay(lastDayOfMonth);
+		dispatch(actionCreator());
+  }, [startDay, endDay]);
+
+	function actionCreator() {
+    return dispatch => {
+			dispatch(transactionOperations.getExpenseTransactions({
+				startDate: startDay, // yyyy-mm-dd
+				endDate: endDay, // yyyy-mm-dd
+			}));
+			dispatch(transactionOperations.getIncomeTransactions({
+				startDate: startDay, // yyyy-mm-dd
+				endDate: endDay, // yyyy-mm-dd
+			}));
+    }
+	}
+
+	const incomeAll = useSelector(transactionSelectors.getIncomeTransactions);
+	const expensesAll = useSelector(transactionSelectors.getExpenseTransactions);
+
+	const incomeTotal = incomeAll.reduce((prev, { amount }) => {
+			return prev + amount
+	}, 0)
+
+	const expensesTotal = expensesAll.reduce((prev, { amount }) => {
+		return prev + amount
+	}, 0)
 
 
-	// useEffect(() => {
-  //   dispatch(categoriesOperations.getExpensesCategories());
-  // }, [dispatch]);
+	const expenses = expensesAll.reduce((acc, {category, amount}) => {
+			const objInAcc = acc.find(elem => elem.category === category);
+			if (objInAcc) objInAcc.amount += amount;
+			else acc.push({category, amount});
+			return acc;
+	}, []);
 
-	// function actionCreator(payload) {
-  //   return dispatch => {
-  //       dispatch(action1(payload))
-  //       dispatch(action2(payload))
-  //   }
-	// }
+ const expensesAmount = expenses.map(obj => {return obj.amount});
+ const labels = expenses.map(obj => {return obj.category});
 
-  
+	// const startDay = new Date('2021-10-01');
+	// const endDay = new Date('2021-11-25');
 
-	// const getExpenses = useSelector(state =>
-  //  categoriesSelectors.getExpensesCategories(state),
-  // );
-	
-
-	const labels = [
-    "Основные расходы",
-    "Продукты",
-    "Машина",
-    "Забота о себе",
-    "Забота о детях",
-    "Товары для дома",
-    "Образование",
-    "Досуг",
-    "Другие расходы"
-  ];
-
-	const expenses = [
-		{ category: "Food", amount: 15515 },
-		{ category: "Home", amount: 700 },
-		{ category: "Children", amount: 560 },
-		{ category: "Car", amount: 120 },
-		{ category: "Pool", amount: 860 }
-	];
-
-	const expensesAmount = [8700, 2000, 1500, 800, 2208, 300, 3400, 1230, 610];
-	const expensesTotal = 340;
-	const incomeTotal = 100000;
-	
 	const allExpenses = expenses.map((expense, index) => {
 		return {
 			category: expense.category,
@@ -76,6 +83,12 @@ export default function StatView() {
 	const costs = { category: "Expenses", amount: expensesTotal };
 	const income = { category: "Income", amount: incomeTotal };
 	const results = [...allExpenses, costs, income];
+
+	const handleDateChange = (first, last) => {
+		setStartDay(first);
+		setEndDay(last);
+	}
+
   return (
     <Container>
       <VisualContainer>
@@ -87,10 +100,10 @@ export default function StatView() {
         <InfoBlock />
 			</div>   
 					<div className={styles.wrapContainer}>
-							<Diagram colors={colors} expensesTotal={expensesTotal} expenses={expensesAmount}/>
+							<Diagram colors={colors} expensesTotal={expensesTotal} expenses={expensesAmount} labels={labels}/>
 						<div className={styles.calendarTable}>
-							<Datepicker />
-							<StatisticsTable results={results} labels={labels} />
+							<Datepicker dateChange={handleDateChange}/>
+							<StatisticsTable results={results}  />
 						</div>
 					</div>
         </div>
