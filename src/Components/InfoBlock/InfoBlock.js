@@ -8,7 +8,8 @@ export default function Info() {
     return (
         <div className={ styles.info }>
             <div className={ styles.main }>
-                <Navigation /> 
+                <Navigation />
+            
                 <Balance />
             </div>
             <div className={styles.curContainer + ' ' + styles.hidden}>
