@@ -6,12 +6,12 @@ import styles from './balance.module.scss';
 
 const Balance = () => {
     const dispatch = useDispatch();
-    const balance = useSelector(state => usersSelectors.getCurrentBalance(state));
-  
+    
     useEffect(() => {
         dispatch(usersOperations.getCurrentBalance());
-    }, [dispatch, balance]);
+    });
 
+    const balance = useSelector(usersSelectors.getCurrentBalance);
 
     return (
         <div className={styles.balanceContainer}>

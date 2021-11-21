@@ -1,54 +1,49 @@
 @import '../../Styles/main.scss';
 
-.text {
-  @include font-data($font-poppins, 25px, $text-black, 700, 1.3);
+.сontainer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: $main-white;
+  padding: 36px 20px;
+
+  @media screen and (min-width: $tablet) {
+    width: 540px;
+    height: 616px;
+    padding: 50px 65px;
+    border-radius: 20px;
+  }
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .logoBox {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 30px;
 }
-.wrapProgress {
-  position: relative;
-  margin: 0;
-  padding: 0;
-}
-.progressbar {
-  position: absolute;
-  top: 60%;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  border-radius: 25px;
-}
-.progressbar progress {
-  border-radius: 25px;
-  width: 100%;}
 
-.progressbar progress::-webkit-progress-bar {
-        border-radius: 25px;
-        background: #fff;
-        height: 4px;
-      }
-progress::-webkit-progress-value {
-  background: -webkit-linear-gradient(left, #e5ff00, #24cca7);
-  border-radius: 25px;
-  box-shadow: 0px 1px 4px #24cca7;
+.logo {
+  width: 28px;
+  height: 22px;
+  margin-right: 15px;
+
+  @media screen and (min-width: $tablet) {
+    width: 38px;
+    height: 31px;
+  }
 }
-progress::-webkit-progress-value {
-  background: -webkit-linear-gradient(left, #e5ff00, #24cca7);
-  border-radius: 25px;
-  box-shadow: 0px 1px 4px #24cca7;
+
+.text {
+  @include font-data($font-poppins, 30px, $text-black, 700, 1.5);
 }
-.btnWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 280px;
-  margin: 0 auto;
-}
+
 .linkBtn {
-  width: 280px;
   display: block;
   padding: 13px 68px;
   border: 1px solid $main-blue;
@@ -57,51 +52,54 @@ progress::-webkit-progress-value {
   text-transform: uppercase;
   text-align: center;
   outline: none;
-  @include font-data($font-poppins, 14px, $main-blue, 700, 1.5);}
+  @include font-data($font-poppins, 18px, $main-blue, 400, 1.3);
 
-  .innerContainer {
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        padding: 36px 20px;
-        margin: 0 auto;
-      }
-      
-      .logo {
-        width: 28px;
-        height: 22px;
-      }
-      .form {
-            margin-top: 50px;
-            width: 100%;
-            text-align: center;
-          }
+  @media screen and (min-width: $tablet) {
+    width: 280px;
+  }
+}
 
-@media screen and (min-width: $tablet){
-  .innerContainer {
-        border-radius: 20px;
-        background-color: #fff;
-        padding: 40px 65px 60px 65px;
-        margin: 52px auto;
-        height: 616px;
-        width: 540px;
-      }
-  .logo {
-        width: 38px;
-        height: 31px;
-      }
-  .form {
-        text-align: center;
-        margin-top: 50px;
-        width: 410px;
-      }
-  .progressbar{
+.btnWrapper {
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.progressbar {
+  position: absolute;
+  top: 35%;
+  display: flex;
+  align-items: center;
+  width: 94%;
+  border-radius: 25px;
+
+  @media screen and (min-width: $tablet) {
+    top: 50%;
     width: 410px;
   }
-  .progressbar progress {
-      -webkit-appearance: none;
-      border: none;
-      height: 4px;
-    }
-  .linkBtn{width: 280px;}
+}
+
+.progressbar progress {
+  border-radius: 25px;
+  width: 100%;
+
+  @media screen and (min-width: $tablet) {
+    -webkit-appearance: none;
+    border: none;
+    height: 4px;
+  }
+}
+
+.progressbar progress::-webkit-progress-bar {
+  border-radius: 25px;
+  background: #e5f1ef;
+  height: 4px;
+}
+
+progress::-webkit-progress-value {
+  background: -webkit-linear-gradient(left, #e5ff00, #24cca7);
+  border-radius: 25px;
+  box-shadow: 0px 1px 4px #24cca7;
 }

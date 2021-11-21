@@ -1,5 +1,6 @@
-
 import * as React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -13,47 +14,38 @@ import ImageTablet from "./Vector-tablet.svg";
 import ImageDesktop from "./Vector-tablet.svg";
 import { Typography } from "@mui/material";
 
+import getCurrentcies from '../../Services/CurrencyApi'
 
-
-
-
-function createData(name, usd, eur, rub) {
-  return { name, usd, eur, rub };
+function createData(name, usd, eur, rub, btc) {
+  return { name, usd, eur, rub, btc };
 }
 
-const rows = [
-  createData('USD', '27.55', '27.65'),
-  createData('EUR', '30.00','30.10'),
-  createData('RUB', '00.00', '00.00'),
+let rows = [
+  createData('USD', '', ''),
+  createData('EUR', '', ''),
+  createData('RUB', '', ''),
+  createData('BTC', '', ''),
 ];
-
 
 const useStyles = makeStyles(muiTheme => ({
     table: {
-      
-     
       borderCollapse: 'inherit',
       background: `rgb(74, 86, 226) url(${Image}) bottom right no-repeat`,
       '@media (min-width: 768px)': { 
         background: `rgb(74, 86, 226) url(${ImageTablet}) bottom right no-repeat`,
         maxWidth: "334px",
-        
-       
       },
 
       '@media (min-width: 1280px)': { 
         background: `rgb(74, 86, 226) url(${ImageDesktop}) bottom right no-repeat`,
         maxWidth: "348px",
         height: "347px", 
-        
-        
       }
     },
 
     tableHeader: {
         backgroundColor: `rgba(255, 255, 255, 0.2)`,
         fontWeight: 'bold'
-
     },
      tableBodyRow: {
         '@media (min-width: 1280px)': { 
@@ -61,17 +53,29 @@ const useStyles = makeStyles(muiTheme => ({
                 paddingBottom: '135px'
                 },
           }
-
      }
-}))
+})) 
 
 export default function BasicTable() {
-    const classes = useStyles();
+  const classes = useStyles();
+  const [state, setState] = useState();
+
+  useEffect(() => {
+    getCurrentcies().then(setState)    
+  }, [])
+  
+  if (state) {
+    rows = state.map(({ ccy, buy, sale, ...rest}) => {
+      return createData(ccy, parseFloat(buy).toFixed(2), parseFloat(sale).toFixed(2));
+    })
+  }
+
   return (
     <TableContainer
       component={Paper}
       sx={{
-        boxShadow: 0
+        boxShadow: 0,
+        bgcolor: "transparent"
       }}
     >
       <Table className={classes.table}
@@ -90,13 +94,13 @@ export default function BasicTable() {
                
               }}
             >
-             <Typography style={{ fontWeight: 'bold' }}>Валюта</Typography>
+             <Typography style={{ fontWeight: 'bold' }}>Currency</Typography>
             </TableCell>
             <TableCell className={classes.tableHead} align="center"  sx={{ color: "white", border: 0}}>
-            <Typography style={{ fontWeight: 'bold' }}>Покупка</Typography>
+            <Typography style={{ fontWeight: 'bold' }}>Sell price</Typography>
             </TableCell>
             <TableCell align="right"  sx={{ color: "white", border: 0}}>
-            <Typography style={{ fontWeight: 'bold' }}>Продажа</Typography>
+            <Typography style={{ fontWeight: 'bold' }}>Buy price</Typography>
             </TableCell>
           </TableRow>
         </TableHead>
