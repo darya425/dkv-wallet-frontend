@@ -52,9 +52,13 @@ const useStyles = makeStyles(muiTheme => ({
 
     tableHeader: {
         backgroundColor: `rgba(255, 255, 255, 0.2)`,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        '@media (min-width: 1280px)': {
+          height: "60px"
+        }
 
     },
+
      tableBodyRow: {
         '@media (min-width: 1280px)': { 
             "&:last-child td, &:last-child th": {
@@ -72,7 +76,8 @@ export default function BasicTable() {
       component={Paper}
       sx={{
         boxShadow: 0,
-        bgcolor: "transparent"
+        bgcolor: "transparent",
+        borderRadius: "30px"
       }}
     >
       <Table className={classes.table}
