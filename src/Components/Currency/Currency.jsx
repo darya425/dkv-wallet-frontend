@@ -138,11 +138,11 @@ export default function BasicTable() {
             >
              <Typography style={{ fontWeight: 'bold' }}>Currency</Typography>
             </TableCell>
-            <TableCell className={classes.tableHead} align="center"  sx={{ color: "white", border: 0}}>
-            <Typography style={{ fontWeight: 'bold' }}>Buy price</Typography>
+            <TableCell className={classes.tableHead}  sx={{ color: "white", border: 0}}>
+            <Typography style={{ fontWeight: 'bold' }}>To Buy</Typography>
             </TableCell>
             <TableCell align="right"  sx={{ color: "white", border: 0}}>
-            <Typography style={{ fontWeight: 'bold' }}>Sell price</Typography>
+            <Typography style={{ fontWeight: 'bold' }}>To Sell</Typography>
             </TableCell>
           </TableRow>
         </TableHead>
@@ -160,7 +160,7 @@ export default function BasicTable() {
               >
                 {row.name}
               </TableCell>
-              <TableCell align="center"  sx={{ color: "white", border: 0 }}>
+              <TableCell  sx={{ color: "white", border: 0 }}>
                 {row.usd}
               </TableCell>
               <TableCell align="right" sx={{ color: "white", border: 0 }}>
