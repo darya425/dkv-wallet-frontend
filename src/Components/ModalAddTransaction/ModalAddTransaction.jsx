@@ -37,7 +37,7 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
       case 'amount':
         return setAmount(value);
       case 'date':
-        return setDate(value);
+        return setDate(value + ' ' + new Date().toLocaleTimeString());
       case 'comment':
         return setComment(value);
       default:
@@ -129,7 +129,7 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
                   variant="standard"
                   name='date'
                   onChange={handleChange}
-                  defaultValue={Date.now()}
+                  value={Date.now()}
                   InputLabelProps={{
                     shrink: true,
                 }}

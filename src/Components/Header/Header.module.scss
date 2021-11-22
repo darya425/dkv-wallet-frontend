@@ -85,15 +85,14 @@
     margin-left: 0;
   }
 }
+
 .logoutButton:hover svg {
   fill: $main-green;
 }
-.nameMenu:hover {  .logoutButton { color: red;} }
- 
+
 .logoutIcon {
   width: 18px;
   height: 18px;
-
 }
 
 .buttonText {
@@ -105,8 +104,4 @@
     margin-left: 10px;
     @include font-data($font-circe, 18px, false, 400, 1.3);
   }
-}
-
-.h-6{
-  fill: red;
 }
