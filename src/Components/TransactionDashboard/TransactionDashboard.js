@@ -134,10 +134,7 @@ export default function TransactionDashboard() {
     allTransactions && (
       <>
         {/*mainTable*/}
-        <TableContainer
-          // sx={{ }}
-          className={classes.mainTableContainer}
-        >
+        <TableContainer className={classes.mainTableContainer}>
           <Table className={classes.table} stickyHeader>
             <TableHead className={classes.mainTableHeader}>
               <TableRow>

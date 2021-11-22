@@ -14,10 +14,12 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const dateNow = new Date().toISOString().slice(0, 10)
+
   const [isChecked, setIsChecked] = useState(true);
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
-  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  const [date, setDate] = useState(dateNow);
   const [comment, setComment] = useState('');
 
   const {categories} = useSelector(categoriesSelectors.getExpenseCategories);
@@ -48,16 +50,17 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
   const reset = () => {
     setCategory('');
     setAmount('');
-    setDate('');
+    setDate(dateNow);
     setComment('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const type = isChecked ? 'expense' : 'income';
-    dispatch(transactionOperations.addTransaction({type, category, amount, date, comment}))
-    reset();
+    await dispatch(transactionOperations.addTransaction({ type, category, amount, date, comment }))
     toggleModal();
+    await dispatch(transactionOperations.getAllTransactions())
+    reset();
   }
 
   return (

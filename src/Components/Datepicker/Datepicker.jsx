@@ -16,7 +16,7 @@ const Datepicker = ({dateChange}) => {
     const year = value.getFullYear();
     const firstDayOfMonth = `'${year}-${month}-01'`;
     const lastDayOfMonth = `'${year}-${month}-${daysInMonth(month, year)}`;
-    console.log(firstDayOfMonth, lastDayOfMonth);
+
     dateChange(firstDayOfMonth, lastDayOfMonth);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
