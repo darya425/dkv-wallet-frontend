@@ -11,15 +11,17 @@ const Datepicker = ({dateChange}) => {
     return new Date(year, month, 0).getDate();
   }
 
- 
-  const handleDateChange = e => {
-    setValue(e);
+  useEffect(() => {
     const month = value.getMonth() + 1;
     const year = value.getFullYear();
     const firstDayOfMonth = `'${year}-${month}-01'`;
     const lastDayOfMonth = `'${year}-${month}-${daysInMonth(month, year)}`;
     console.log(firstDayOfMonth, lastDayOfMonth);
     dateChange(firstDayOfMonth, lastDayOfMonth);
+  }, [value]);
+ 
+  const handleDateChange = e => {
+    setValue(e);
   }
 
   return (
@@ -29,6 +31,8 @@ const Datepicker = ({dateChange}) => {
         label="Year and Month"
         minDate={new Date("2015-01-01")}
         maxDate={new Date()}
+        format='yyyy-MM-dd'
+        okText={'OK'}
         value={value}
         onChange={handleDateChange}
         renderInput={(params) => <TextField {...params} helperText={null}/>}

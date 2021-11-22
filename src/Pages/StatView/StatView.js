@@ -19,18 +19,7 @@ export default function StatView() {
 
 	const dispatch = useDispatch();
 
-	function daysInMonth (month, year) {
-    return new Date(year, month, 0).getDate();
-  }
-
 	useEffect(() => {
-		const date = new Date();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-  const firstDayOfMonth = `'${year}-${month}-01'`;
-  const lastDayOfMonth = `'${year}-${month}-${daysInMonth(month, year)}`;
-	setStartDay(firstDayOfMonth);
-    setEndDay(lastDayOfMonth);
 		dispatch(actionCreator());
   }, [startDay, endDay]);
 
@@ -66,11 +55,8 @@ export default function StatView() {
 			return acc;
 	}, []);
 
- const expensesAmount = expenses.map(obj => {return obj.amount});
- const labels = expenses.map(obj => {return obj.category});
-
-	// const startDay = new Date('2021-10-01');
-	// const endDay = new Date('2021-11-25');
+	const expensesAmount = expenses.map(obj => {return obj.amount});
+	const labels = expenses.map(obj => {return obj.category});
 
 	const allExpenses = expenses.map((expense, index) => {
 		return {
@@ -99,13 +85,13 @@ export default function StatView() {
       <div className={styles.hiddenInfo}>
         <InfoBlock />
 			</div>   
-					<div className={styles.wrapContainer}>
+				<div className={styles.wrapContainer}>
 							<Diagram colors={colors} expensesTotal={expensesTotal} expenses={expensesAmount} labels={labels}/>
 						<div className={styles.calendarTable}>
 							<Datepicker dateChange={handleDateChange}/>
 							<StatisticsTable results={results}  />
 						</div>
-					</div>
+					</div> 
         </div>
       </VisualContainer>
     </Container>
