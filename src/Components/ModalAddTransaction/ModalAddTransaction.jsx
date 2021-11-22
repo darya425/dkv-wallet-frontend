@@ -17,7 +17,7 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
   const [isChecked, setIsChecked] = useState(true);
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [comment, setComment] = useState('');
 
   const {categories} = useSelector(categoriesSelectors.getExpenseCategories);
@@ -129,7 +129,7 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
                   variant="standard"
                   name='date'
                   onChange={handleChange}
-                  defaultValue={Date.now()}
+                  defaultValue={date}
                   InputLabelProps={{
                     shrink: true,
                 }}

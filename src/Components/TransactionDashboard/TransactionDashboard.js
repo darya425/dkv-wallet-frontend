@@ -135,7 +135,7 @@ export default function TransactionDashboard() {
       <>
         {/*mainTable*/}
         <TableContainer
-          // sx={{ maxHeight: '50vh' }}
+          // sx={{ }}
           className={classes.mainTableContainer}
         >
           <Table className={classes.table} stickyHeader>

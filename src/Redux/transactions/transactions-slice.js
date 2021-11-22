@@ -28,15 +28,24 @@ const transactionSlice = createSlice({
   initialState,
   extraReducers: {
     [transactionOperations.addTransaction.fulfilled]: (state, { payload }) => {
-      state.transactions = [...state.transactions, payload.result];
+      state.transactions = [payload.result, ...state.transactions];
     },
-    [transactionOperations.getAllTransactions.fulfilled]: (state, { payload }) => {
+    [transactionOperations.getAllTransactions.fulfilled]: (
+      state,
+      { payload },
+    ) => {
       state.transactions = payload.transactions;
     },
-    [transactionOperations.getExpenseTransactions.fulfilled]: (state, { payload }) => {
+    [transactionOperations.getExpenseTransactions.fulfilled]: (
+      state,
+      { payload },
+    ) => {
       state.statistics.expenseTransactions = payload.result;
-		},
-    [transactionOperations.getIncomeTransactions.fulfilled]: (state, { payload }) => {
+    },
+    [transactionOperations.getIncomeTransactions.fulfilled]: (
+      state,
+      { payload },
+    ) => {
       state.statistics.incomeTransactions = payload.result;
     },
     // [transactionOperations.getStatistics.fulfilled]: (state, { payload }) => {

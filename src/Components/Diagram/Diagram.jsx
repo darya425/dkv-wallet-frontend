@@ -39,6 +39,7 @@ const Diagram = ({ colors, labels, expenses, expensesTotal }) => {
     return () => {
       newChartInstance.destroy();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [labels, expenses]);
 
   return (
