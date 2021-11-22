@@ -96,8 +96,8 @@ export default function BasicTable() {
           newState[i] = { ccy, newBuy, newSale };
           break;
         case 3:
-          newBuy = (parseFloat(buy) / usdBuy).toFixed(3);
-          newSale = (parseFloat(sale) / usdSale).toFixed(3);
+          newBuy = (parseFloat(buy) / usdBuy).toFixed(0);
+          newSale = (parseFloat(sale) / usdSale).toFixed(0);
           newState[i] = { ccy, newBuy, newSale };
           break;
         
