@@ -1,7 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authOperations, authSelectors } from './Redux/auth';
-import { transactionOperations } from './Redux/transactions';
+
+import {
+  transactionOperations,
+  transactionSelectors,
+} from './Redux/transactions';
 import { usersOperations } from './Redux/users';
 import { categoriesOperations } from './Redux/categories';
 
@@ -14,6 +18,10 @@ const TestRegister = () => {
   const [name, setName] = useState('');
 
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
+  const expTransations = useSelector(
+    transactionSelectors.getExpenseTransactions,
+  );
+  console.log(expTransations);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -100,6 +108,18 @@ const TestRegister = () => {
     console.log(await dispatch(usersOperations.getCurrentBalance()));
   };
 
+  const getExpStatBtn = async e => {
+    e.preventDefault();
+    console.log(
+      await dispatch(
+        transactionOperations.getExpenseTransactions({
+          startDate: '2021-12-11T00:00:00Z',
+          endDate: '2021-12-15T00:00:00Z',
+        }),
+      ),
+    );
+  };
+
   // const getIncomesBtn = async e => {
   //   e.preventDefault();
   //   console.log(await dispatch(categoriesOperations.getIncomesCategories()));
@@ -137,6 +157,9 @@ const TestRegister = () => {
           </button>
           <button type="button" onClick={getCurrentBalanceBtn}>
             get current Balance
+          </button>
+          <button type="button" onClick={getExpStatBtn}>
+            get expense statistic
           </button>
         </div>
       ) : (

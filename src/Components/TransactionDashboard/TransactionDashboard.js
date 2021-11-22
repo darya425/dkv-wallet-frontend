@@ -22,6 +22,7 @@ const useStyles = makeStyles(muiTheme => ({
     display: 'none',
     [muiTheme.breakpoints.up('tablet')]: {
       display: 'block',
+      maxHeight: '60vh',
 
       '&::-webkit-scrollbar': {
         width: '10px',
@@ -38,10 +39,11 @@ const useStyles = makeStyles(muiTheme => ({
         background: 'rgba(255, 255, 255, 0.8)',
       },
     },
+    [muiTheme.breakpoints.up('desktop')]: {
+      maxHeight: '85vh',
+    },
   },
   mainTableHeader: {
-    backgroundColor: '#fff',
-
     '& th, td': {
       fontWeight: 'bold',
     },
@@ -133,7 +135,7 @@ export default function TransactionDashboard() {
       <>
         {/*mainTable*/}
         <TableContainer
-          sx={{ maxHeight: 440 }}
+          // sx={{ maxHeight: '50vh' }}
           className={classes.mainTableContainer}
         >
           <Table className={classes.table} stickyHeader>
@@ -196,61 +198,66 @@ export default function TransactionDashboard() {
         <TableContainer className={classes.secondTableContainer}>
           {allTransactions.map(transaction => (
             <Table
+              key={transaction._id}
               className={
                 transaction.type === 'income'
                   ? classes.secondTables + ' ' + classes.incomeTransaction
                   : classes.secondTables + ' ' + classes.expenseTransaction
               }
             >
-              <TableRow>
-                <TableCell variant="head" className={classes.sTableFont}>
-                  Date
-                </TableCell>
-                <TableCell align="right">
-                  {new Date(transaction.date).toLocaleDateString()}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell variant="head" className={classes.sTableFont}>
-                  Type
-                </TableCell>
-                <TableCell align="right">
-                  {transaction.type === 'income' ? '+' : '-'}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell variant="head" className={classes.sTableFont}>
-                  Category
-                </TableCell>
-                <TableCell align="right">{transaction.category}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell variant="head" className={classes.sTableFont}>
-                  Comment
-                </TableCell>
-                <TableCell align="right">{transaction.comment}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell variant="head" className={classes.sTableFont}>
-                  Amount
-                </TableCell>
-                <TableCell
-                  align="right"
-                  className={
-                    transaction.type === 'income'
-                      ? classes.incomeAmount
-                      : classes.expenseAmount
-                  }
-                >
-                  {transaction.amount}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell variant="head" className={classes.sTableFont}>
-                  Balance
-                </TableCell>
-                <TableCell align="right">{transaction.balanceState}</TableCell>
-              </TableRow>
+              <TableBody>
+                <TableRow>
+                  <TableCell variant="head" className={classes.sTableFont}>
+                    Date
+                  </TableCell>
+                  <TableCell align="right">
+                    {new Date(transaction.date).toLocaleDateString()}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell variant="head" className={classes.sTableFont}>
+                    Type
+                  </TableCell>
+                  <TableCell align="right">
+                    {transaction.type === 'income' ? '+' : '-'}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell variant="head" className={classes.sTableFont}>
+                    Category
+                  </TableCell>
+                  <TableCell align="right">{transaction.category}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell variant="head" className={classes.sTableFont}>
+                    Comment
+                  </TableCell>
+                  <TableCell align="right">{transaction.comment}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell variant="head" className={classes.sTableFont}>
+                    Amount
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    className={
+                      transaction.type === 'income'
+                        ? classes.incomeAmount
+                        : classes.expenseAmount
+                    }
+                  >
+                    {transaction.amount}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell variant="head" className={classes.sTableFont}>
+                    Balance
+                  </TableCell>
+                  <TableCell align="right">
+                    {transaction.balanceState}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
             </Table>
           ))}
         </TableContainer>
