@@ -9,9 +9,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { makeStyles } from '@mui/styles';
-import Image from "./Vector.svg";
-import ImageTablet from "./Vector-tablet.svg";
-import ImageDesktop from "./Vector-tablet.svg";
+import Image from "./Vector-mobile.png";
+import ImageTablet from "./Vector-tablet.png";
+import ImageDesktop from "./Vector-desktop.png";
 import { Typography } from "@mui/material";
 
 import getCurrentcies from '../../Services/CurrencyApi'
@@ -45,7 +45,8 @@ const useStyles = makeStyles(muiTheme => ({
 
     tableHeader: {
         backgroundColor: `rgba(255, 255, 255, 0.2)`,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        height: "60px"
     },
      tableBodyRow: {
         '@media (min-width: 1280px)': { 
@@ -115,7 +116,8 @@ export default function BasicTable() {
       component={Paper}
       sx={{
         boxShadow: 0,
-        bgcolor: "transparent"
+        bgcolor: "transparent",
+        borderRadius: "30px"
       }}
     >
       <Table className={classes.table}
