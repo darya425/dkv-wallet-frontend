@@ -6,7 +6,6 @@ const authSelectors = {
   getIsLoggedIn,
   getUserName,
   getIsFetchingCurrentUser,
-  getUserName,
 };
 
 export default authSelectors;

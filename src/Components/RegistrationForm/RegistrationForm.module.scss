@@ -1,7 +1,6 @@
 @import '../../Styles/main.scss';
 
 .сontainer {
-  position: relative;
   width: 100vw;
   height: 100vh;
   background-color: $main-white;
@@ -68,38 +67,28 @@
 }
 
 .progressbar {
-  position: absolute;
-  top: 35%;
   display: flex;
   align-items: center;
-  width: 94%;
+  width: 100%;
   border-radius: 25px;
-
-  @media screen and (min-width: $tablet) {
-    top: 50%;
-    width: 410px;
-  }
 }
 
 .progressbar progress {
   border-radius: 25px;
   width: 100%;
-
-  @media screen and (min-width: $tablet) {
-    -webkit-appearance: none;
-    border: none;
-    height: 4px;
-  }
+  -webkit-appearance: none;
+  border: none;
+  height: 4px;
 }
 
 .progressbar progress::-webkit-progress-bar {
   border-radius: 25px;
-  background: #e5f1ef;
+  background: $text-grey6;
   height: 4px;
 }
 
 progress::-webkit-progress-value {
-  background: -webkit-linear-gradient(left, #e5ff00, #24cca7);
+  background: -webkit-linear-gradient(left, $yellow, $main-green);
   border-radius: 25px;
-  box-shadow: 0px 1px 4px #24cca7;
+  box-shadow: 0px 1px 4px $main-green;
 }

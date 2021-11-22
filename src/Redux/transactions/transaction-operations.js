@@ -17,7 +17,7 @@ const addTransaction = createAsyncThunk(
         setSnackbar(
           true,
           'error',
-          'Somethink went wrong, please try again later',
+          'Something went wrong, please try again later',
         ),
       );
       return thunkApi.rejectWithValue(state);
@@ -37,7 +37,7 @@ const getAllTransactions = createAsyncThunk(
         setSnackbar(
           true,
           'error',
-          'Somethink went wrong, please try again later',
+          'Something went wrong, please try again later',
         ),
       );
       return thunkApi.rejectWithValue(state);
@@ -60,7 +60,7 @@ const getStatistics = createAsyncThunk(
         setSnackbar(
           true,
           'error',
-          'Somethink went wrong, please try again later',
+          'Something went wrong, please try again later',
         ),
       );
       return thunkApi.rejectWithValue(state);
@@ -73,7 +73,7 @@ const getExpenseTransactions = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await axios.post(
-        '/api/transactions/statistics',
+        '/api/transactions/expense',
         credentials,
       );
       return data;
@@ -83,7 +83,7 @@ const getExpenseTransactions = createAsyncThunk(
         setSnackbar(
           true,
           'error',
-          'Somethink went wrong, please try again later',
+          'Something went wrong, please try again later',
         ),
       );
       return thunkApi.rejectWithValue(state);
@@ -92,11 +92,11 @@ const getExpenseTransactions = createAsyncThunk(
 );
 
 const getIncomeTransactions = createAsyncThunk(
-  'transactions/expense',
+  'transactions/income',
   async (credentials, thunkApi) => {
     try {
       const { data } = await axios.post(
-        '/api/transactions/statistics',
+        '/api/transactions/income',
         credentials,
       );
       return data;
@@ -106,7 +106,7 @@ const getIncomeTransactions = createAsyncThunk(
         setSnackbar(
           true,
           'error',
-          'Somethink went wrong, please try again later',
+          'Something went wrong, please try again later',
         ),
       );
       return thunkApi.rejectWithValue(state);

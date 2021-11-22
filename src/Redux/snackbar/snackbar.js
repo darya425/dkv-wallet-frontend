@@ -1,12 +1,12 @@
-export const SET_SNACKBAR = 'teamly/settings/SET_SNACKBAR';
-
 const initialState = {
   snackbarOpen: false,
   snackbarType: 'success',
   snackbarMessage: '',
 };
 
-export default (state = initialState, action) => {
+export const SET_SNACKBAR = 'teamly/settings/SET_SNACKBAR';
+// eslint-disable-next-line import/no-anonymous-default-export
+export default function snackbarReduser(state = initialState, action) {
   switch (action.type) {
     case SET_SNACKBAR:
       const { snackbarOpen, snackbarMessage, snackbarType } = action;
@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}
 
 export const setSnackbar = (
   snackbarOpen,

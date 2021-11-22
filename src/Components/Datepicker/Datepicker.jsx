@@ -4,34 +4,26 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 
-const Datepicker = ({getMonthTransactions}) => {
+const Datepicker = ({dateChange}) => {
   const [value, setValue] = useState(new Date());
-  // const [loading, setLoading] = useState('false');
-  const getDate = new Date(value);
-  const month = getDate.getMonth() + 1;
-  const year = getDate.getFullYear();
+
   function daysInMonth (month, year) {
     return new Date(year, month, 0).getDate();
   }
-// console.log(daysInMonth(month, year));
 
-//   useEffect(() => {
-//     getMonthTransactions(value);
-//     // abort request on unmount
-//     return () => ;
-//   }, []);
+  useEffect(() => {
+    const month = value.getMonth() + 1;
+    const year = value.getFullYear();
+    const firstDayOfMonth = `'${year}-${month}-01'`;
+    const lastDayOfMonth = `'${year}-${month}-${daysInMonth(month, year)}`;
 
-// const handleMonthChange = (date) => {
-//     if () {
-//       // make sure that you are aborting useless requests
-//       // because it is possible to switch between months pretty quickly
-//      
-//     }
-
-//     setIsLoading(true);
-//     setTransactions([]);
-//     getMonthTransactions(date);
-//   };
+    dateChange(firstDayOfMonth, lastDayOfMonth);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+ 
+  const handleDateChange = e => {
+    setValue(e);
+  }
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -40,10 +32,10 @@ const Datepicker = ({getMonthTransactions}) => {
         label="Year and Month"
         minDate={new Date("2015-01-01")}
         maxDate={new Date()}
+        format='yyyy-MM-dd'
+        okText={'OK'}
         value={value}
-        onChange={(newValue) => {
-          setValue(newValue);
-        }}
+        onChange={handleDateChange}
         renderInput={(params) => <TextField {...params} helperText={null}/>}
       />
     </LocalizationProvider>

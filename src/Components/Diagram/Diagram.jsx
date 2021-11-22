@@ -4,7 +4,6 @@ import styles from "./Diagram.module.scss";
 
 const Diagram = ({ colors, labels, expenses, expensesTotal }) => {
   const chartContainer = useRef();
-
   const data = {
     labels,
     datasets: [
@@ -40,7 +39,8 @@ const Diagram = ({ colors, labels, expenses, expensesTotal }) => {
     return () => {
       newChartInstance.destroy();
     };
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [labels, expenses]);
 
   return (
     <div className={styles.chartContainer}>

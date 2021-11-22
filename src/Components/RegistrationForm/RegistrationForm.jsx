@@ -18,19 +18,19 @@ const RegistrationForm = () => {
   let push = useNavigate();
 
   const {
+    handleBlur,
     handleSubmit,
     handleChange,
     values,
     touched,
     errors,
+
   } = useFormik({
     initialValues: {
       email: '',
       password: '',
       confirm: '',
       name: '',
-      showPassword: false,
-      showConfirmPassword: false,
     },
     validationSchema: Yup.object({
       email: Yup.string()
@@ -49,8 +49,6 @@ const RegistrationForm = () => {
         .min(1, 'Enter your name')
         .max(12, 'Enter 12 symbols or less')
         .required('Required field'),
-      showPassword: Yup.bool().default('false'),
-      showConfirmPassword: Yup.bool().default('false'),
     }),
     onSubmit: ({ email, password, name }) => {
       dispatch(authOperations.register({ email, password, name }));
@@ -87,6 +85,7 @@ const RegistrationForm = () => {
           variant="standard"
           name="email"
           type="email"
+          onBlur={handleBlur}
           values={values.email}
           onChange={handleChange}
           placeholder="Enter your email"
@@ -107,6 +106,7 @@ const RegistrationForm = () => {
           variant="standard"
           type="password"
           name="password"
+          onBlur={handleBlur}
           values={values.password}
           onChange={handleChange}
           placeholder="Enter your password"
@@ -119,34 +119,35 @@ const RegistrationForm = () => {
           }}
           helperText={touched.password && errors.password}
         />
-        <TextField
-          sx={{
-            '&.MuiTextField-root': { m: 2 },
-          }}
-          fullWidth
-          variant="standard"
-          type="password"
+          <TextField
+            sx={{
+              '&.MuiTextField-root': { m: 2},
+            }}
+            fullWidth
+            variant="standard"
+            type="password"
           name="confirm"
-          values={values.confirm}
-          onChange={handleChange}
-          placeholder="Confirm your password"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <LockIcon htmlColor="#E0E0E0" />
-              </InputAdornment>
-            ),
-          }}
-          helperText={touched.confirm && errors.confirm}
-        />
-        <div className={styles.progressbar}>
-          <progress
-            min="0"
-            max="4"
-            value={valuesRange}
-            id="progress"
-          ></progress>
-        </div>
+          onBlur={handleBlur}
+            values={values.confirm}
+            onChange={handleChange}
+            placeholder="Confirm your password"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <LockIcon htmlColor="#E0E0E0" />
+                </InputAdornment>
+              ),
+            }}
+            helperText={touched.confirm && errors.confirm}
+          />
+          <div className={styles.progressbar}>
+            <progress
+              min="0"
+              max="4"
+              value={valuesRange}
+              id="progress"
+            ></progress>
+          </div>
         <TextField
           sx={{
             '&.MuiTextField-root': { m: 2 },
@@ -155,6 +156,7 @@ const RegistrationForm = () => {
           variant="standard"
           type="text"
           name="name"
+          onBlur={handleBlur}
           values={values.name}
           onChange={handleChange}
           placeholder="Enter you name"

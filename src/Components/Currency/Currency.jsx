@@ -65,8 +65,48 @@ export default function BasicTable() {
   }, [])
   
   if (state) {
-    rows = state.map(({ ccy, buy, sale, ...rest}) => {
-      return createData(ccy, parseFloat(buy).toFixed(2), parseFloat(sale).toFixed(2));
+    const { buy, sale } = state[1];
+    const eurBuy = parseFloat(buy);
+    const eurSale = parseFloat(sale);
+    let newBuy = null;
+    let newSale = null;
+    let usdBuy = null;
+    let usdSale = null;
+    const newState = [];
+
+    for (let i = 0; i < state.length; i++) {
+      const { ccy, buy, sale } = state[i];
+      switch (i) {
+        case 0:
+          newBuy = (eurBuy / parseFloat(buy)).toFixed(3);
+          newSale = (eurSale / parseFloat(sale)).toFixed(3);
+          newState[i] = { ccy, newBuy, newSale };
+          usdBuy = newBuy;
+          usdSale = newSale;
+          break;
+        case 1:
+          newBuy = eurBuy.toFixed(3);
+          newSale = eurSale.toFixed(3);
+          newState[i] = { ccy: "UAH", newBuy, newSale };          
+          break;
+        case 2:
+          newBuy = (eurBuy / parseFloat(buy)).toFixed(3);
+          newSale = (eurSale / parseFloat(sale)).toFixed(3);
+          newState[i] = { ccy, newBuy, newSale };
+          break;
+        case 3:
+          newBuy = (parseFloat(buy) / usdBuy).toFixed(3);
+          newSale = (parseFloat(sale) / usdSale).toFixed(3);
+          newState[i] = { ccy, newBuy, newSale };
+          break;
+        
+        default:
+          break;
+      }
+    }
+
+    rows = newState.map(({ ccy, newBuy, newSale}) => {
+      return createData(ccy, newBuy, newSale)
     })
   }
 
@@ -97,10 +137,10 @@ export default function BasicTable() {
              <Typography style={{ fontWeight: 'bold' }}>Currency</Typography>
             </TableCell>
             <TableCell className={classes.tableHead} align="center"  sx={{ color: "white", border: 0}}>
-            <Typography style={{ fontWeight: 'bold' }}>Sell price</Typography>
+            <Typography style={{ fontWeight: 'bold' }}>Buy price</Typography>
             </TableCell>
             <TableCell align="right"  sx={{ color: "white", border: 0}}>
-            <Typography style={{ fontWeight: 'bold' }}>Buy price</Typography>
+            <Typography style={{ fontWeight: 'bold' }}>Sell price</Typography>
             </TableCell>
           </TableRow>
         </TableHead>
