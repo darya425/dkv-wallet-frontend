@@ -73,7 +73,7 @@ const getExpenseTransactions = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await axios.post(
-        '/api/transactions/statistics',
+        '/api/transactions/expense',
         credentials,
       );
       return data;
@@ -92,11 +92,11 @@ const getExpenseTransactions = createAsyncThunk(
 );
 
 const getIncomeTransactions = createAsyncThunk(
-  'transactions/expense',
-  async (credentials, thunkApi) => {
+  'transactions/income',
+  async credentials => {
     try {
       const { data } = await axios.post(
-        '/api/transactions/statistics',
+        '/api/transactions/income',
         credentials,
       );
       return data;
