@@ -1,20 +1,29 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal, Fade, TextField, MenuItem, Button, FormControlLabel } from '@mui/material';
+import {
+  Modal,
+  Fade,
+  TextField,
+  MenuItem,
+  Button,
+  FormControlLabel,
+} from '@mui/material';
 
 import Switcher from './Switcher';
 import { transactionOperations } from '../../Redux/transactions';
-import { categoriesOperations, categoriesSelectors } from '../../Redux/categories';
+import {
+  categoriesOperations,
+  categoriesSelectors,
+} from '../../Redux/categories';
 
 import styles from './ModalAddTransaction.module.scss';
 import { useStyles, Backdrop } from './stylesMUI';
-
 
 const ModalAddTransaction = ({ open, toggleModal }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const dateNow = new Date().toISOString().slice(0, 10)
+  const dateNow = new Date().toISOString().slice(0, 10);
 
   const [isChecked, setIsChecked] = useState(true);
   const [category, setCategory] = useState('');
@@ -22,15 +31,15 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
   const [date, setDate] = useState(dateNow);
   const [comment, setComment] = useState('');
 
-  const {categories} = useSelector(categoriesSelectors.getExpenseCategories);
+  const { categories } = useSelector(categoriesSelectors.getExpenseCategories);
 
   useEffect(() => {
     dispatch(categoriesOperations.getExpensesCategories());
-  },[dispatch]);
+  }, [dispatch]);
 
   const handleCheck = () => {
     setIsChecked(prev => !prev);
-  }
+  };
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -39,7 +48,9 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
       case 'amount':
         return setAmount(value);
       case 'date':
-        return setDate(value);
+        return setDate(
+          sliceTime(value + ' ' + new Date().toLocaleTimeString()),
+        );
       case 'comment':
         return setComment(value);
       default:
@@ -47,24 +58,39 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
     }
   };
 
+  const sliceTime = finalDate => {
+    if (finalDate.includes('PM') || finalDate.includes('AM')) {
+      return finalDate.slice(0, finalDate.length - 2);
+    }
+    return finalDate;
+  };
+
   const reset = () => {
     setCategory('');
     setAmount('');
     setDate(dateNow);
     setComment('');
-    setIsChecked(true)
+    setIsChecked(true);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const type = isChecked ? 'expense' : 'income';
-    dispatch(transactionOperations.addTransaction({ type, category, amount, date: date+ ' ' + new Date().toLocaleTimeString(), comment }))
+    dispatch(
+      transactionOperations.addTransaction({
+        type,
+        category,
+        amount,
+        date,
+        comment,
+      }),
+    );
     toggleModal();
     reset();
-  }
+  };
 
   return (
-      <Modal
+    <Modal
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       className={classes.modal}
@@ -75,84 +101,95 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
       BackdropProps={{
         timeout: 500,
       }}
-      sx={{position: 'absolute'}}
+      sx={{ position: 'absolute' }}
     >
       <Fade in={open}>
         <div className={classes.paper}>
           <form className={classes.form} onSubmit={handleSubmit}>
-              <p className={styles.modalText}>Add transaction</p>
-              <div className={styles.switcherContainer}>
-                <span
-                  className={isChecked ? styles.switcherText : `${styles.switcherText} ${styles.green}`}
-                >
-                  Incomes
-                </span>
-                <FormControlLabel
-                  control={<Switcher sx={{ m: 1 }} defaultChecked />}
-                  label=""
-                  sx={{ margin: '0' }}
-                  onChange={handleCheck}
-                />
-                <span
-                  className={isChecked ? `${styles.switcherText} ${styles.red}` : styles.switcherText}
-                >
-                  Expenses
-                </span>
-              </div>
-              {isChecked && 
-                <TextField
-                  select
-                  label="Choose category"
-                  value={category}
-                  name='category'
-                  onChange={handleChange}
-                  variant="standard"
-                  sx={{ marginBottom: '40px' }}
-                >
-                  {categories.map((category) => (
-                    <MenuItem key={category.categoryName} value={category.categoryName}>
-                      {category.categoryName}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              }
-              <div className={styles.inputContainer}>
-                <TextField
-                  variant="standard"
-                  placeholder="0.00"
-                  name='amount'
-                  value={amount}
-                  onChange={handleChange}
-                  sx={{ marginRight: '30px', marginBottom: '40px'}}
-                  className={classes.textField}
-                />
-                <TextField
-                  id="date"
-                  type="date"
-                  variant="standard"
-                  name='date'
-                  onChange={handleChange}
-                  defaultValue={date}
-                  InputLabelProps={{
-                    shrink: true,
-                }}
-                sx={{color: '#BDBDBD'}}
-                  className={classes.textField}
-                />
-              </div>
-              <TextField
-                id="standard-basic"
-                variant="standard"
-                placeholder="Comment"
-                name='comment'
-                value={comment}
-                onChange={handleChange}
-                sx={{marginBottom: '40px'}}
+            <p className={styles.modalText}>Add transaction</p>
+            <div className={styles.switcherContainer}>
+              <span
+                className={
+                  isChecked
+                    ? styles.switcherText
+                    : `${styles.switcherText} ${styles.green}`
+                }
+              >
+                Incomes
+              </span>
+              <FormControlLabel
+                control={<Switcher sx={{ m: 1 }} defaultChecked />}
+                label=""
+                sx={{ margin: '0' }}
+                onChange={handleCheck}
               />
-              <Button
+              <span
+                className={
+                  isChecked
+                    ? `${styles.switcherText} ${styles.red}`
+                    : styles.switcherText
+                }
+              >
+                Expenses
+              </span>
+            </div>
+            {isChecked && (
+              <TextField
+                select
+                label="Choose category"
+                value={category}
+                name="category"
+                onChange={handleChange}
+                variant="standard"
+                sx={{ marginBottom: '40px' }}
+              >
+                {categories.map(category => (
+                  <MenuItem
+                    key={category.categoryName}
+                    value={category.categoryName}
+                  >
+                    {category.categoryName}
+                  </MenuItem>
+                ))}
+              </TextField>
+            )}
+            <div className={styles.inputContainer}>
+              <TextField
+                variant="standard"
+                placeholder="0.00"
+                name="amount"
+                value={amount}
+                onChange={handleChange}
+                sx={{ marginRight: '30px', marginBottom: '40px' }}
+                className={classes.textField}
+              />
+              <TextField
+                id="date"
+                type="date"
+                variant="standard"
+                name="date"
+                onChange={handleChange}
+                defaultValue={date}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={{ color: '#BDBDBD' }}
+                className={classes.textField}
+              />
+            </div>
+            <TextField
+              id="standard-basic"
+              variant="standard"
+              placeholder="Comment"
+              name="comment"
+              value={comment}
+              onChange={handleChange}
+              sx={{ marginBottom: '40px' }}
+            />
+            <Button
               variant="contained"
               color="primary"
-              type='submit'
+              type="submit"
               sx={{
                 borderRadius: '20px',
                 marginBottom: '20px',
@@ -160,7 +197,7 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
                 paddingBottom: '13px',
                 boxShadow: 'none',
                 width: '100%',
-                fontSize: '18px'
+                fontSize: '18px',
               }}
             >
               ADD
@@ -173,17 +210,17 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
                 width: '100%',
                 paddingTop: '13px',
                 paddingBottom: '13px',
-                fontSize: '18px'
+                fontSize: '18px',
               }}
               onClick={toggleModal}
             >
               CANCEL
             </Button>
-            </form>
+          </form>
         </div>
       </Fade>
     </Modal>
-  )
-}
+  );
+};
 
 export default ModalAddTransaction;

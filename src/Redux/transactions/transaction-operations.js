@@ -12,6 +12,7 @@ const addTransaction = createAsyncThunk(
       const { data } = await axios.post('/api/transactions', credentials);
       thunkApi.dispatch(setSnackbar(true, 'success', 'Transaction added'));
       thunkApi.dispatch(usersOperations.getCurrentBalance());
+      thunkApi.dispatch(getAllTransactions());
       return data;
     } catch (error) {
       const state = thunkApi.getState();
