@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setSnackbar } from '../snackbar/snackbar';
 
-axios.defaults.baseURL = 'http://wallet-backend-g5.herokuapp.com';
+axios.defaults.baseURL = 'https://wallet-backend-g5.herokuapp.com';
 
 const getCurrentBalance = createAsyncThunk(
   'users/getCurrentBalance',

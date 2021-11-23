@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setSnackbar } from '../snackbar/snackbar';
 import { usersOperations } from '../../Redux/users';
 
-axios.defaults.baseURL = 'http://wallet-backend-g5.herokuapp.com';
+axios.defaults.baseURL = 'https://wallet-backend-g5.herokuapp.com';
 
 const addTransaction = createAsyncThunk(
   'transactions/addTransactions',
