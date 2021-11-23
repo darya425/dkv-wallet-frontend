@@ -39,7 +39,7 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
       case 'amount':
         return setAmount(value);
       case 'date':
-        return setDate(value + ' ' + new Date().toLocaleTimeString());
+        return setDate(value);
       case 'comment':
         return setComment(value);
       default:
@@ -52,14 +52,14 @@ const ModalAddTransaction = ({ open, toggleModal }) => {
     setAmount('');
     setDate(dateNow);
     setComment('');
+    setIsChecked(true)
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const type = isChecked ? 'expense' : 'income';
-    await dispatch(transactionOperations.addTransaction({ type, category, amount, date, comment }))
+    dispatch(transactionOperations.addTransaction({ type, category, amount, date: date+ ' ' + new Date().toLocaleTimeString(), comment }))
     toggleModal();
-    await dispatch(transactionOperations.getAllTransactions())
     reset();
   }
 
