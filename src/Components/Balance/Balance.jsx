@@ -11,9 +11,9 @@ const Balance = () => {
     const balance = useSelector(usersSelectors.getCurrentBalance);
     const transactions = useSelector(transactionSelectors.getAllTransactions)
     
-    useEffect(() => {
-        dispatch(usersOperations.getCurrentBalance());
-    }, [dispatch, transactions]);
+    // useEffect(() => {
+    //     dispatch(usersOperations.getCurrentBalance());
+    // }, [dispatch, transactions]);
 
 
     return (

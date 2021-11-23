@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setSnackbar } from '../snackbar/snackbar';
+import { usersOperations } from '../../Redux/users';
 
 axios.defaults.baseURL = 'http://wallet-backend-g5.herokuapp.com';
 
@@ -10,6 +11,7 @@ const addTransaction = createAsyncThunk(
     try {
       const { data } = await axios.post('/api/transactions', credentials);
       thunkApi.dispatch(setSnackbar(true, 'success', 'Transaction added'));
+      thunkApi.dispatch(usersOperations.getCurrentBalance());
       return data;
     } catch (error) {
       const state = thunkApi.getState();
@@ -30,6 +32,7 @@ const getAllTransactions = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const { data } = await axios.get('/api/transactions');
+      thunkApi.dispatch(usersOperations.getCurrentBalance());
       return data;
     } catch (error) {
       const state = thunkApi.getState();
