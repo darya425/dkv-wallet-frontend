@@ -7,14 +7,7 @@ import { transactionSelectors } from '../../Redux/transactions'
 import styles from './balance.module.scss';
 
 const Balance = () => {
-    const dispatch = useDispatch();
     const balance = useSelector(usersSelectors.getCurrentBalance);
-    const transactions = useSelector(transactionSelectors.getAllTransactions)
-    
-    // useEffect(() => {
-    //     dispatch(usersOperations.getCurrentBalance());
-    // }, [dispatch, transactions]);
-
 
     return (
         <div className={styles.balanceContainer}>
