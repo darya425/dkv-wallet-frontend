@@ -12,12 +12,12 @@ const Datepicker = ({dateChange}) => {
   }
 
   useEffect(() => {
-    const month = value.getMonth() + 1;
+    if(value !== null){
+      const month = value.getMonth() + 1;
     const year = value.getFullYear();
     const firstDayOfMonth = `'${year}-${month}-01'`;
     const lastDayOfMonth = `'${year}-${month}-${daysInMonth(month, year)}`;
-
-    dateChange(firstDayOfMonth, lastDayOfMonth);
+    dateChange(firstDayOfMonth, lastDayOfMonth);}
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
  

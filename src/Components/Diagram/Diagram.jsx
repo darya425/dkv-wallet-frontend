@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef} from "react";
 import Chart from "chart.js/auto";
 import styles from "./Diagram.module.scss";
 
@@ -44,9 +44,9 @@ const Diagram = ({ colors, labels, expenses, expensesTotal }) => {
 
   return (
     <div className={styles.chartContainer}>
-      <p className={styles.statisticsTitle}>Statistics</p>
+      <p className={styles.statisticsTitle}>Expense statistics</p>
       <canvas ref={chartContainer} className="canvas" />
-      <p className={styles.chartInside}>€ {expensesTotal}</p>
+      {expensesTotal? <p className={styles.chartInside}>€ {expensesTotal}</p>: <p className={styles.chartInside}>No expenses for this month</p>}
     </div>
   );
 };
