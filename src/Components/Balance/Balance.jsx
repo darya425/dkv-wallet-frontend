@@ -1,17 +1,20 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { usersOperations, usersSelectors } from '../../Redux/users';
+import { transactionSelectors } from '../../Redux/transactions'
+
 
 import styles from './balance.module.scss';
 
 const Balance = () => {
     const dispatch = useDispatch();
+    const balance = useSelector(usersSelectors.getCurrentBalance);
+    const transactions = useSelector(transactionSelectors.getAllTransactions)
     
     useEffect(() => {
         dispatch(usersOperations.getCurrentBalance());
-    });
+    }, [dispatch, transactions]);
 
-    const balance = useSelector(usersSelectors.getCurrentBalance);
 
     return (
         <div className={styles.balanceContainer}>

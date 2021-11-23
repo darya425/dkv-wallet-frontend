@@ -126,10 +126,7 @@ export default function TransactionDashboard() {
 
   const classes = useStyles();
 
-  const allTransactions = useSelector(state =>
-    transactionSelectors.getAllTransactions(state),
-  );
-
+  const allTransactions = useSelector(transactionSelectors.getAllTransactions);
   return (
     allTransactions && (
       <>
