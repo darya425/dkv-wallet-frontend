@@ -23,7 +23,9 @@ export default function StatView() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actionCreator());
+    if (startDay && endDay) {
+      dispatch(actionCreator());
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startDay, endDay]);
 
