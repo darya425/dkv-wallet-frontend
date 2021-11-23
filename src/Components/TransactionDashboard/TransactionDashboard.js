@@ -22,7 +22,7 @@ const useStyles = makeStyles(muiTheme => ({
     display: 'none',
     [muiTheme.breakpoints.up('tablet')]: {
       display: 'block',
-      maxHeight: '60vh',
+      maxHeight: '50vh',
 
       '&::-webkit-scrollbar': {
         width: '10px',
