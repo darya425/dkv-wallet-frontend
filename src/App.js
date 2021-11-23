@@ -26,6 +26,7 @@ const StatView = lazy(() =>
 const CurrencyView = lazy(() =>
   import('./Pages/CurrencyView' /* webpackChunkName: "CurrencyView"*/),
 );
+const NotFoundView = lazy(() => import('./Pages/NotFoundView/NotFoundView'));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -56,7 +57,6 @@ const App = () => {
             <Route
               path="/login"
               redirectTo="/home"
-              restricted
               element={
                 <PublicRoute restricted>
                   <LoginView />
@@ -66,7 +66,6 @@ const App = () => {
 
             <Route
               path="/register"
-              restricted
               element={
                 <PublicRoute restricted>
                   <RegisterView />
@@ -103,6 +102,7 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+            <Route path="*" element={<NotFoundView />} />
           </Routes>
         </Suspense>
       </>
