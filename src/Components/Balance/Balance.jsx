@@ -1,8 +1,5 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { usersOperations, usersSelectors } from '../../Redux/users';
-import { transactionSelectors } from '../../Redux/transactions'
-
+import {  useSelector } from 'react-redux';
+import {  usersSelectors } from '../../Redux/users';
 
 import styles from './balance.module.scss';
 
