@@ -1,0 +1,67 @@
+@import '../../Styles/main.scss';
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: $main-white;
+  padding: 110px 20px;
+
+  @media screen and (min-width: $tablet) {
+    width: 540px;
+    height: 468px;
+    padding: 50px 65px;
+    border-radius: 20px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.logo {
+  width: 28px;
+  height: 22px;
+  margin-right: 15px;
+
+  @media screen and (min-width: $tablet) {
+    width: 38px;
+    height: 31px;
+  }
+}
+
+.text {
+  @include font-data($font-poppins, 30px, $text-black, 700, 1.5);
+}
+
+.linkBtn {
+  display: block;
+  padding: 13px 68px;
+  border: 1px solid $main-blue;
+  border-radius: 20px;
+  height: 50px;
+  text-transform: uppercase;
+  text-align: center;
+  outline: none;
+  @include font-data($font-poppins, 18px, $main-blue, 400, 1.3);
+
+  @media screen and (min-width: $tablet) {
+    width: 280px;
+  }
+}
+
+.btnWrapper {
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

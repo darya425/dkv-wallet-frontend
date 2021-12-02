@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './Redux/store';
+import { ThemeProvider } from '@mui/material/styles';
+import muiTheme from './Components/UI/muiTheme';
 
 import App from './App';
 
@@ -15,7 +17,9 @@ ReactDOM.render(
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <BrowserRouter>
-          <App />
+          <ThemeProvider theme={muiTheme}>
+            <App />
+          </ThemeProvider>
         </BrowserRouter>
       </PersistGate>
     </Provider>

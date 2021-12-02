@@ -1,0 +1,58 @@
+@import '../../Styles/main.scss';
+
+.visualContainer {
+  &::before {
+    display: none;
+    content: url('../../Images/UpPart.png');
+    position: absolute;
+    top: 80px;
+    right: 0;
+    z-index: -1;
+    filter: blur(25px);
+
+    @media screen and (min-width: $tablet) {
+      display: block;
+    }
+
+    @media screen and (min-width: $desktop) {
+      content: url('../../Images/UpPartDesk.png');
+    }
+  }
+
+  &::after {
+    display: none;
+    content: url('../../Images/LowPart.png');
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    z-index: -1;
+    filter: blur(25px);
+
+    @media screen and (min-width: $tablet) {
+      display: block;
+    }
+  }
+}
+
+.visualLine {
+  &::after {
+    display: none;
+    content: '';
+    position: absolute;
+    top: 85px;
+    left: 465px;
+    height: calc(100vh - 85px);
+    z-index: 1;
+    border-right: 1px solid #e7e5f2;
+    box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.05),
+      1px 0px 0px rgba(255, 255, 255, 0.6);
+
+    @media screen and (min-width: $desktop) {
+      display: block;
+    }
+
+    @media screen and (min-width: 1500px) {
+      left: calc(50vw - 285px);
+    }
+  }
+}

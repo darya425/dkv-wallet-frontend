@@ -1,18 +1,22 @@
+import RegistrationForm from '../../Components/RegistrationForm';
 import styles from './RegisterView.module.scss';
+import girl from '../../Images/mobileGirl.png';
+import Container from '../../Components/UI/Container';
 
 function RegisterView() {
   return (
-    <div className={styles.container}>
-      <div className={styles.containerBg}>
-        <div className={styles.imgWrapper}>
-          <div className={styles.img} />
-          <p className={styles.appName}>Finance App</p>
-        </div>
-
-        <div className={styles.formWrapper}>
-        </div>
+    <Container>
+      <div className={styles.container}>
+          <div className={styles.imgWrapper}>
+          <img src={girl} alt="guy" className={styles.img} />
+            <p className={styles.appName}>Finance App</p>
+          </div>
+          <div className={styles.formWrapper}>
+            <RegistrationForm />
+          </div>
+        
       </div>
-    </div>
+    </Container>
   );
 }
 

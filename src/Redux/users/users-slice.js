@@ -1,49 +1,19 @@
-// import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-// import transactionOperations from './transaction-operations';
+import usersOperations from './users-operations';
 
-// const initialState = {
-//   newTransaction: {
-//     amount: null,
-//     balanceState: null,
-//     category: null,
-//     comment: null,
-//     createdAt: null,
-//     date: null,
-//     owner: null,
-//     type: 'expense',
-//     updatedAt: null,
-//     _id: null,
-//   },
-//   allTransactions: {
-//     quantity: null,
-//     transactions: [],
-//   },
-//   statistics: {
-//     quantity: null,
-//     transactions: [],
-//   },
-// };
+const initialState = {
+    currentBalance: null,
+};
 
-// const transactionSlice = createSlice({
-//   name: 'transactions',
-//   initialState,
-//   extraReducers: {
-//     [transactionOperations.addTransaction.fulfilled]: (state, { payload }) => {
-//       state.newTransaction = payload.result;
-//     },
-//     [transactionOperations.getAllTransactions.fulfilled]: (
-//       state,
-//       { payload },
-//     ) => {
-//       state.allTransactions.quantity = payload.quantity;
-//       state.allTransactions.transactions = payload.transactions;
-//     },
-//     [transactionOperations.getStatistics.fulfilled]: (state, { payload }) => {
-//       state.allTransactions.quantity = payload.quantity;
-//       state.allTransactions.transactions = payload.transactions;
-//     },
-//   },
-// });
+const userSlice = createSlice({
+  name: 'user',
+  initialState,
+  extraReducers: {
+    [usersOperations.getCurrentBalance.fulfilled]: (state, { payload }) => {
+      state.currentBalance = payload.user.currentBalance;
+    },
+  },
+});
 
-// export default transactionSlice.reducer;
+export default userSlice.reducer;

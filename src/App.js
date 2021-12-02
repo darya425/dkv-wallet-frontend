@@ -1,12 +1,15 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { authOperations, authSelectors } from './Redux/auth';
 
 import PrivateRoute from './Components/Navigation/PrivateRoute';
 import PublicRoute from './Components/Navigation/PublicRoute';
+import Spinner from './Components/Spinner';
 
-import Container from './Components/UI/Container';
-import muiTheme from './Components/UI/muiTheme';
+import Header from './Components/Header';
+import Snackbar from './Components/Snackbar/Snackbar';
 
 const LoginView = lazy(() =>
   import('./Pages/LoginView' /* webpackChunkName: "LoginView"*/),
@@ -23,17 +26,58 @@ const StatView = lazy(() =>
 const CurrencyView = lazy(() =>
   import('./Pages/CurrencyView' /* webpackChunkName: "CurrencyView"*/),
 );
+const NotFoundView = lazy(() => import('./Pages/NotFoundView/NotFoundView'));
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  const isFetchingCurrentUser = useSelector(
+    authSelectors.getIsFetchingCurrentUser,
+  );
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
+
   return (
-    <ThemeProvider theme={muiTheme}>
-      <Container>
-        <Suspense fallback={'Loading...'}>
+    !isFetchingCurrentUser && (
+      <>
+        <Snackbar />
+        <Suspense fallback={<Spinner />}>
           <Routes>
             <Route
               path="/"
               element={
+                <PublicRoute restricted>
+                  <LoginView />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path="/login"
+              redirectTo="/home"
+              element={
+                <PublicRoute restricted>
+                  <LoginView />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path="/register"
+              element={
+                <PublicRoute restricted>
+                  <RegisterView />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path="/home"
+              element={
                 <PrivateRoute>
+                  <Header />
                   <HomeView />
                 </PrivateRoute>
               }
@@ -43,6 +87,7 @@ const App = () => {
               path="/statistics"
               element={
                 <PrivateRoute>
+                  <Header />
                   <StatView />
                 </PrivateRoute>
               }
@@ -52,45 +97,16 @@ const App = () => {
               path="/currency"
               element={
                 <PrivateRoute>
+                  <Header />
                   <CurrencyView />
                 </PrivateRoute>
               }
             />
-
-            <Route
-              path="/user"
-              element={
-                <PrivateRoute>
-                  <p>User</p>
-                </PrivateRoute>
-              }
-            />
-
-            <Route
-              path="/login"
-              redirectTo="/user"
-              restricted
-              element={
-                <PublicRoute>
-                  <LoginView />
-                </PublicRoute>
-              }
-            />
-
-            <Route
-              path="/register"
-              redirectTo="/login"
-              restricted
-              element={
-                <PublicRoute>
-                  <RegisterView />
-                </PublicRoute>
-              }
-            />
+            <Route path="*" element={<NotFoundView />} />
           </Routes>
         </Suspense>
-      </Container>
-    </ThemeProvider>
+      </>
+    )
   );
 };
 

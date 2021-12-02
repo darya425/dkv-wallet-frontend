@@ -1,112 +1,85 @@
-@import '../../Styles/vars.css';
+@import '../../Styles/main.scss';
 
-@media (max-width: 767px) {
-  .container {
-    width: 320px;
-    margin: auto;
+.container {
+  display: flex;
+  justify-content: center;
+
+  @media screen and (min-width: $tablet) {
+    flex-direction: column;
+    align-items: center;
+
+    height: 100vh;
   }
-  .appName {
-    visibility: hidden;
-    opacity: 0;
+
+  @media screen and (min-width: $desktop) {
+    flex-direction: row;
+    justify-content: space-between;
   }
-  .img {
+
+  &::before {
     display: none;
+    content: url('../../Images/UpPart.png');
+    position: absolute;
+    width: 420px;
+    top: 0;
+    right: 0;
+    z-index: -1;
+
+    @media screen and (min-width: $tablet) {
+      display: block;
+    }
+
+    @media screen and (min-width: $desktop) {
+      content: '';
+      width: 56%;
+      height: 100vh;
+      background-image: url('../../Images/backgraund.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+
+  &::after {
+    display: none;
+    content: url('../../Images/LowPart.png');
+    position: absolute;
+    width: 420px;
+    bottom: -50px;
+    left: 0;
+    z-index: -1;
+
+    @media screen and (min-width: $tablet) {
+      display: block;
+    }
+  }
+}
+
+.imgWrapper {
+  display: none;
+
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    flex-direction: column;
+    margin-bottom: 0;
   }
 }
 
 .img {
   width: 260px;
-  height: 250px;
-  background-image: url('../../Images/mobileGirl.png');
-  background-position: center;
-  background-size: 260px 250px;
-  background-repeat: no-repeat;
-}
+  margin-right: 40px;
 
-@media (min-width: 768px) and (max-width: 1277px) {
-  .container {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    margin: auto;
-    background-color: #e5e5e5;
-    background-image: url('../../Images/UpPart.png'),
-      url('../../Images/LowPart.png');
-    background-position: 100% 0, 0 100%;
-    background-repeat: no-repeat, no-repeat;
-    background-size: auto, auto;
-  }
-
-  .imgWrapper {
-    display: flex;
-    margin: 60px auto 0 auto;
-    width: 540px;
-  }
-
-  .appName {
-    display: block;
-    margin: auto;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 1.5;
-    text-align: center;
+  @media screen and (min-width: $desktop) {
+    width: 435px;
+    margin-right: 0;
+    margin-bottom: 30px;
   }
 }
 
-@media (min-width: 1278px) {
-  .container {
-    width: 1280px;
-    height: 720px;
-    margin: auto;
-  }
-  .containerBg {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    display: flex;
-
-    background-color: #e5e5e5;
-
-    background-image: url('../../Images/UpPart.png'),
-      url('../../Images/LowPart.png');
-    background-position: 100% 0, 0 100%;
-    background-repeat: no-repeat, no-repeat;
-    background-size: auto, auto;
-  }
-
-  .img {
-    width: 452px;
-    height: 419px;
-    background-size: 452px 419px;
-  }
-
-  .imgWrapper {
-    margin: auto;
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    background-size: 452px 419px;
-  }
-  .formWrapper {
-    display: flex;
-    align-items: center;
-    background-image: url('../../Images/backgraund.jpg');
-    background-size: cover;
-    width: 60vw;
-  }
-  .appName {
-    display: block;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 1.5;
-    margin-top: 28px;
-    text-align: center;
-  }
+.appName {
+  @include font-data($font-poppins, 30px, $text-black, 400, 1.5);
 }

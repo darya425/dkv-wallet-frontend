@@ -1,0 +1,35 @@
+@import '../../Styles/main.scss';
+
+.info {
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    display: inline-block;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 43px;
+    padding-right: 30px;
+  }
+}
+
+.curContainer {
+  @media screen and (min-width: $tablet) {
+    min-width: 334px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    margin-top: 30px;
+    min-width: 348px;
+  }
+}
+
+.hidden {
+  @media screen and (max-width: $max-mobile) {
+    @include visually-hidden;
+  }
+}

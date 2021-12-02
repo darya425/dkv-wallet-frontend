@@ -4,23 +4,21 @@ const muiTheme = createTheme({
   palette: {
     primary: {
       main: '#24CCA7', //main GREEN
+      contrastText: '#FFFFFF',
     },
     secondary: {
       main: '#4A56E2', //main BLUE
+      contrastText: '#4A56E2',
     },
-    // main: {
-    //   blue: '#4A56E2', // main BLUE
-    //   green: '#24CCA7', // main GREEN
-    //   red: '#FF6596', // main RED
-    //   white: '#FFFFFF', // WHITE
-    //   black: '#000000', // BLACK
-    //   background: '#E7EAF2', // background GREY
-    // },
-    neutral: {
-      grey4: '#BDBDBD',
-      grey5: '#E0E0E0',
-      pink: '#FFD8D0',
-      purple: '#C5BAFF',
+    accent: {
+      main: '#FF6596',
+    },
+
+    success: {
+      main: '#24CCA7',
+    },
+    error: {
+      main: '#FF6596',
     },
   },
   breakpoints: {

@@ -1,36 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef} from "react";
 import Chart from "chart.js/auto";
 import styles from "./Diagram.module.scss";
 
-const Diagram = () => {
+const Diagram = ({ colors, labels, expenses, expensesTotal }) => {
   const chartContainer = useRef();
-
   const data = {
-    labels: [
-      "Основные расходы",
-      "Продукты",
-      "Машина",
-      "Забота о себе",
-      "Забота о детях",
-      "Товары для дома",
-      "Образование",
-      "Досуг",
-      "Другие расходы"
-    ],
+    labels,
     datasets: [
       {
-        data: [8700, 2000, 1500, 800, 2208, 300, 3400, 1230, 610],
-        backgroundColor: [
-          "rgba(254, 208, 87, 1)",
-          "rgba(255, 216, 208, 1)",
-          "rgba(253, 148, 152, 1)",
-          "rgba(197, 186, 255, 1)",
-          "rgba(110, 120, 232, 1)",
-          "rgba(74, 86, 226, 1)",
-          "rgba(129, 225, 255, 1)",
-          "rgba(36, 204, 167, 1)",
-          "rgba(0, 173, 132, 1)"
-        ],
+        data: expenses,
+        backgroundColor: colors,
 
         borderWidth: 0,
         hoverOffset: 4
@@ -43,20 +22,10 @@ const Diagram = () => {
     },
     plugins: {
       legend: {
-        display: false,
-        position: "bottom"
-      },
-
-      title: {
-        display: false,
-        text: "Statistics",
-        align: "start",
-        font: {
-          size: 30
-        },
-        color: "black"
+        display: false
       }
-    }
+    }, 
+    cutout: 100,
   };
 
   const config = {
@@ -70,13 +39,14 @@ const Diagram = () => {
     return () => {
       newChartInstance.destroy();
     };
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [labels, expenses]);
 
   return (
     <div className={styles.chartContainer}>
-      <p className={styles.statisticsTitle}>Statistics</p>
+      <p className={styles.statisticsTitle}>Expense statistics</p>
       <canvas ref={chartContainer} className="canvas" />
-      <p className={styles.chartInside}> 99999999 € </p>
+      {expensesTotal? <p className={styles.chartInside}>€ {expensesTotal}</p>: <p className={styles.chartInside}>No expenses for this month</p>}
     </div>
   );
 };
